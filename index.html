@@ -1,0 +1,377 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Der singende klingende Adventskalender</title>
+<meta name="description" content="1. bis 23. Dezember 2026 in Schwerin: jeden Abend um 19 Uhr Musik an einem anderen Ort. Eintritt frei.">
+<link rel="canonical" href="https://adventskalender.musikklub.com/">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="de_DE">
+<meta property="og:title" content="Der singende klingende Adventskalender">
+<meta property="og:description" content="1. bis 23. Dezember 2026 in Schwerin: jeden Abend um 19 Uhr Musik an einem anderen Ort. Eintritt frei.">
+<meta property="og:url" content="https://adventskalender.musikklub.com/">
+<meta property="og:image" content="https://adventskalender.musikklub.com/bilder/teilen.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#55508f">
+<link rel="icon" href="bilder/symbol.png" type="image/png">
+<link rel="apple-touch-icon" href="bilder/symbol.png">
+<link rel="preload" href="schriften/rozha-one.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="schriften/damion.woff2" as="font" type="font/woff2" crossorigin>
+<style>
+/* Schriften liegen bei der Seite, es wird nichts von Google geladen. Lizenz: schriften/LIZENZ.txt */
+@font-face { font-family: "Rozha One"; src: url(schriften/rozha-one.woff2) format("woff2"); font-weight: 400; font-display: swap; }
+@font-face { font-family: "Damion"; src: url(schriften/damion.woff2) format("woff2"); font-weight: 400; font-display: swap; }
+@font-face { font-family: "Barlow Condensed"; src: url(schriften/barlow-condensed-500.woff2) format("woff2"); font-weight: 500; font-display: swap; }
+:root {
+  --violett: #55508f; --blau: #3b6895; --petrol: #277d84;
+  /* Etwas dunkleres Petrol für die Stellen, auf denen Fließtext steht: Creme erreicht darauf 4,9:1 */
+  --petrol-tief: #237279;
+  --creme: #fdeedd; --gold: #f6c453; --wein: #6b2150; --wein-hell: #8d4776; --tinte: #150f20;
+  --text: "Futura-CondensedMedium", "Futura Condensed", "Barlow Condensed", "Arial Narrow", sans-serif;
+  --fett: "Rozha One", "Bernard MT Condensed", Georgia, serif;
+  --schwung: "Damion", "Brush Script MT", cursive;
+}
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+/* Knöpfe, die ohne JavaScript nichts tun würden, erscheinen dann gar nicht erst */
+html:not(.js) .merken, html:not(.js) .wahl { display: none; }
+html { scroll-behavior: auto; }
+body { margin: 0; background: var(--petrol-tief); color: var(--creme); font: 19px/1.35 var(--text); letter-spacing: .01em; -webkit-font-smoothing: antialiased; }
+img { display: block; max-width: 100%; height: auto; }
+a { color: inherit; }
+button { font: inherit; color: inherit; cursor: pointer; }
+:focus-visible { outline: 3px solid var(--gold); outline-offset: 3px; }
+
+/* Vorschauleiste: erscheint nur auf dem eigenen Rechner mit ?vorschau */
+.vorschau { display: flex; flex-wrap: wrap; gap: 4px 16px; align-items: baseline; padding: 8px 16px; background: var(--tinte); font-size: 16px; }
+.vorschau button { all: unset; cursor: pointer; border-bottom: 2px dashed transparent; opacity: .8; }
+.vorschau button[aria-pressed="true"] { color: var(--gold); border-color: var(--gold); opacity: 1; }
+
+/* Ein Blatt = eine Flyerseite: Verlauf von Violett nach Petrol, gestrichelter Rahmen */
+.blatt { position: relative; overflow: hidden; padding: 30px 26px 40px; background: linear-gradient(var(--violett), var(--blau) 48%, var(--petrol-tief)); isolation: isolate; }
+.blatt::after { content: ""; position: absolute; inset: 9px; border: 2px dashed var(--tinte); opacity: .8; pointer-events: none; z-index: 5; }
+.blatt.hell::after { border-color: var(--creme); opacity: .9; }
+.blatt.rueck { background: linear-gradient(#5a4287, #4a5a96 40%, #267680 82%, var(--petrol-tief)); }
+.blatt .grund { position: absolute; inset: 0; z-index: -2; background-size: cover; background-position: 50% 30%; }
+.staub { position: absolute; inset: 0; width: 100%; height: 100%; z-index: -1; pointer-events: none; }
+.innen { max-width: 1080px; margin: 0 auto; position: relative; z-index: 1; }
+
+.schwung { font-family: var(--schwung); font-weight: 400; color: var(--creme); line-height: 1; }
+.fett { font-family: var(--fett); font-weight: 400; color: var(--gold); line-height: .95; display: inline-block; transform: scaleX(.8); transform-origin: left center; white-space: nowrap; text-shadow: 0 2px 0 rgba(21,15,32,.25); }
+
+/* Türchen-Scheibe wie auf dem Poster */
+.scheibe { display: inline-grid; place-items: center; flex: none; width: 34px; height: 34px; border-radius: 50%; background: var(--wein); color: var(--creme); font: 400 21px/1 var(--fett); box-shadow: inset 0 0 0 2px var(--wein-hell), 0 0 0 2px #2a1026, 0 3px 8px rgba(0,0,0,.55); padding-bottom: 1px; }
+.scheibe span { display: block; transform: scaleX(.82); }
+
+/* Pfeil wie die Randpfeile auf dem Poster */
+.pfeil { display: inline-block; border: 0; text-decoration: none; background: var(--wein); color: var(--creme); font: 400 23px/1 var(--fett); padding: 13px 38px 14px 22px; clip-path: polygon(0 18%, 74% 18%, 74% 0, 100% 50%, 74% 100%, 74% 82%, 0 82%); filter: drop-shadow(0 0 0 #2a1026) drop-shadow(0 3px 5px rgba(0,0,0,.5)); }
+.pfeil span { display: inline-block; transform: scaleX(.84); transform-origin: left; }
+.pfeilhuelle { filter: drop-shadow(0 3px 5px rgba(0,0,0,.5)); display: inline-block; }
+
+/* ---------- Blatt 1: Poster ---------- */
+.poster { padding-top: 34px; padding-bottom: 0; }
+.poster .logo { width: 100%; max-width: 520px; position: relative; z-index: 2; }
+.poster .einhorn { position: absolute; z-index: 1; width: 150px; right: 34px; top: 104px; }
+.immer { margin: 26px 0 0 4px; position: relative; z-index: 2; }
+.immer p { margin: 0 0 4px; }
+.immer .schwung { font-size: 27px; display: block; margin-left: -2px; }
+.immer .fett { font-size: 30px; display: block; }
+.immer .gross { font-size: 54px; }
+.immer .ein { margin-left: 22px; }
+
+.heute { margin-top: 30px; position: relative; z-index: 2; min-height: 282px; padding-bottom: 34px; }
+.heute .kopf { display: flex; align-items: center; gap: 14px; }
+.heute .kopf > div { min-width: 0; }
+.heute .riesig { width: 96px; height: 96px; font-size: 62px; transform: rotate(-6deg); box-shadow: inset 0 0 0 3px var(--wein-hell), 0 0 0 3px #2a1026, 0 0 26px rgba(246,196,83,.55), 0 6px 14px rgba(0,0,0,.5); }
+.heute .wann { font-size: 34px; display: block; }
+.heute .ort { font-size: 38px; display: block; margin-top: 2px; }
+/* Lange Ortsnamen dürfen umbrechen. Die Schrift ist auf 80 % gestaucht, deshalb darf der Kasten breiter sein als der Platz. */
+.heute .ort.lang { font-size: 29px; white-space: normal; line-height: 1; width: 125%; hyphens: auto; overflow-wrap: anywhere; }
+.heute .zeilen { margin: 12px 0 16px; max-width: 58%; }
+.heute .zeilen p { margin: 0; }
+.heute .zeilen b { color: var(--gold); font-weight: 500; }
+.heute .dino { position: absolute; right: -14px; bottom: 6px; width: 172px; z-index: -1; }
+
+/* ---------- Blatt 2: Flyer-Rückseite, Programm ---------- */
+.titel { margin: 6px 0 18px; }
+.titel .schwung { font-size: 32px; display: block; }
+.titel .fett { font-size: 44px; display: block; margin-left: 14px; }
+.vorwort { margin: 0 0 22px; max-width: 34em; }
+.vorwort b { font-weight: 500; color: var(--gold); }
+.liste { list-style: none; margin: 0; padding: 0; }
+.liste li { margin: 0; }
+.liste button, .liste .zeile { all: unset; cursor: pointer; display: grid; grid-template-columns: 34px 1fr auto; gap: 2px 12px; align-items: center; width: 100%; padding: 7px 4px; box-sizing: border-box; font: inherit; color: inherit; }
+.liste .zeile { cursor: auto; }
+.liste .name { color: var(--gold); font-size: 21px; line-height: 1.1; }
+.liste .adr { display: block; font-size: 17px; opacity: .92; line-height: 1.2; }
+.liste .tag { font-size: 16px; opacity: .8; white-space: nowrap; text-align: right; }
+.liste .war { opacity: .78; }
+.liste .jetzt button { background: var(--wein); margin: 8px -12px; padding: 12px 16px; width: calc(100% + 24px); transform: rotate(-.6deg); box-shadow: 0 0 0 2px #2a1026, 0 0 24px rgba(246,196,83,.4), 0 6px 14px rgba(0,0,0,.45); }
+.liste .jetzt .scheibe { background: var(--gold); color: var(--tinte); box-shadow: 0 0 0 2px #2a1026; }
+.liste .jetzt .tag { opacity: 1; color: var(--gold); font-family: var(--schwung); font-size: 24px; }
+.liste .spielt { display: block; font-size: 17px; color: var(--creme); }
+
+/* ---------- Blatt 3: Karte ---------- */
+.kartenblatt { padding-left: 0; padding-right: 0; }
+.kartenblatt .titel, .kartenblatt .wahl { padding: 0 26px; }
+.wahl { display: flex; gap: 18px; margin-bottom: 6px; font-size: 21px; }
+.wahl button { all: unset; cursor: pointer; display: inline-block; box-sizing: border-box; min-height: 44px; padding: 9px 0; opacity: .75; }
+.wahl button[aria-pressed="true"] { color: var(--gold); opacity: 1; text-decoration: underline dashed 2px; text-underline-offset: 6px; }
+.karte { position: relative; }
+.karte img { width: 100%; -webkit-mask-image: linear-gradient(transparent, #000 8%, #000 92%, transparent); mask-image: linear-gradient(transparent, #000 8%, #000 92%, transparent); }
+/* Die Scheibe bleibt klein wie auf dem Poster, die Tippfläche darum ist 44 px groß */
+.nadel { position: absolute; transform: translate(-50%, -50%); border: 0; padding: 0; background: none; display: grid; place-items: center; min-width: 44px; min-height: 44px; }
+.nadel.heute .scheibe { width: 46px; height: 46px; font-size: 28px; background: var(--gold); color: var(--tinte); box-shadow: 0 0 0 2px #2a1026, 0 0 0 9px rgba(246,196,83,.25), 0 0 30px 8px rgba(246,196,83,.6); }
+.nadel.rand .scheibe { border-radius: 0; width: 46px; height: 36px; box-shadow: none; clip-path: polygon(0 16%, 62% 16%, 62% 0, 100% 50%, 62% 100%, 62% 84%, 0 84%); padding-right: 10px; }
+.nadel.rand { filter: drop-shadow(0 3px 5px rgba(0,0,0,.55)); }
+.quelle { font-size: 13px; opacity: .7; padding: 0 26px; margin: 4px 0 0; }
+
+/* ---------- Blatt 4: So läuft ein Abend ---------- */
+.abend ul { list-style: none; padding: 0; margin: 0 0 8px; max-width: 30em; }
+.abend li { padding: 5px 0 5px 34px; position: relative; font-size: 21px; }
+.abend li svg { position: absolute; left: 0; top: 6px; width: 24px; height: 24px; }
+.abend .duett { width: 250px; margin: 14px auto 0; }
+.fuss { text-align: center; padding-bottom: 46px; }
+.fuss .mk { width: 190px; margin: 6px auto 16px; }
+.fuss p { margin: 0 auto 10px; max-width: 26em; font-size: 17px; }
+.fuss .netz { color: var(--gold); font-size: 22px; margin-bottom: 0; }
+.fuss a { display: inline-block; min-height: 44px; padding: 9px 8px; box-sizing: border-box; text-decoration: none; }
+.fuss .recht a { text-decoration: underline dashed 2px; text-underline-offset: 6px; margin: 0 6px; }
+
+.strich { all: unset; cursor: pointer; display: inline-block; box-sizing: border-box; min-height: 44px; padding: 9px 0; color: var(--gold); font-size: 20px; text-decoration: underline dashed 2px; text-underline-offset: 6px; }
+.tuer .merken { margin-top: 9px; max-width: 62%; }
+.merken .hinweis { display: block; font-size: 16px; opacity: .9; }
+.vorwort + .merken { margin: -15px 0 13px; }
+
+/* ---------- Geöffnetes Türchen ---------- */
+dialog { border: 0; padding: 0; margin: auto auto 0; width: 100%; max-width: 460px; max-height: 92vh; background: none; color: var(--creme); overflow: visible; }
+dialog::backdrop { background: rgba(14,10,26,.72); }
+.tuer { position: relative; padding: 62px 28px 30px; background: linear-gradient(#5a4287, #45609a 55%, var(--petrol-tief)); box-shadow: 0 -10px 40px rgba(0,0,0,.5); overflow: hidden; }
+.tuer::after { content: ""; position: absolute; inset: 9px; border: 2px dashed var(--creme); opacity: .9; pointer-events: none; }
+.tuerhuelle > .riesig { position: absolute; left: 26px; top: -8px; width: 104px; height: 104px; font-size: 66px; transform: rotate(-7deg); z-index: 3; box-shadow: inset 0 0 0 3px var(--wein-hell), 0 0 0 3px #2a1026, 0 0 26px rgba(246,196,83,.5), 0 6px 14px rgba(0,0,0,.5); }
+.tuerhuelle { position: relative; padding-top: 44px; }
+.tuer .zu { all: unset; cursor: pointer; position: absolute; right: 22px; top: 11px; box-sizing: border-box; min-height: 44px; padding: 9px 0; font-size: 20px; z-index: 6; text-decoration: underline dashed 2px; text-underline-offset: 6px; }
+.tuer .datum { font-size: 27px; display: block; margin-top: 14px; }
+.tuer .ort { font-size: 40px; display: block; margin-top: 4px; }
+.tuer .ort.lang { font-size: 30px; white-space: normal; line-height: 1; width: 125%; hyphens: auto; overflow-wrap: anywhere; }
+.tuer p { margin: 6px 0 0; font-size: 21px; position: relative; z-index: 2; }
+.tuer .es { font-size: 28px; display: block; margin-top: 16px; }
+.tuer .act { font-size: 28px; line-height: 1.05; color: var(--creme); display: block; margin: 2px 0 20px; white-space: normal; width: 78%; }
+.tuer .figur { position: absolute; right: 6px; bottom: 4px; width: 132px; z-index: 1; }
+.tuer .geheim { max-width: 62%; margin-bottom: 20px; }
+
+/* ---------- Breite Bildschirme ---------- */
+/* Knöpfe mit "all: unset" verlieren sonst ihren Fokusrahmen */
+button:focus-visible, a:focus-visible { outline: 3px solid var(--gold) !important; outline-offset: 3px; }
+
+/* Niedrige Handybildschirme: "wo ist es heute" muss ohne Scrollen sichtbar sein.
+   Der Posterkopf wird kleiner, der Heute-Block rückt vor die drei "immer". */
+@media (max-height: 700px) and (max-width: 899px) {
+  .poster { padding-top: 26px; }
+  .poster .innen { display: flex; flex-direction: column; }
+  .poster .logo { max-width: 300px; }
+  .heute { order: 1; margin-top: 14px; }
+  .heute .riesig { width: 84px; height: 84px; font-size: 54px; }
+  .heute .wann { font-size: 30px; }
+  .heute .ort { font-size: 34px; }
+  .heute .ort.lang { font-size: 25px; }
+  .heute { min-height: 0; padding-bottom: 20px; }
+  .heute .dino { width: 112px; right: -8px; bottom: 10px; }
+  .immer { order: 2; margin: 6px 0 44px 4px; }
+  .poster .einhorn { top: auto; bottom: 96px; width: 124px; right: 20px; }
+}
+@media (max-width: 379px) {
+  .heute .dino { width: 128px; }
+  .heute .zeilen { max-width: 62%; }
+}
+@media (max-width: 350px) {
+  .blatt { padding-left: 20px; padding-right: 20px; }
+  .heute .dino { width: 104px; }
+  .heute .ort.lang { font-size: 22px; }
+  .tuer .ort.lang { font-size: 26px; }
+  .pfeil { font-size: 21px; padding-left: 18px; padding-right: 32px; }
+}
+
+@media (min-width: 900px) {
+  body { font-size: 22px; }
+  .blatt { padding: 54px 60px 64px; }
+  .blatt::after { inset: 16px; }
+  .poster .innen { display: grid; grid-template-columns: 1.15fr 1fr; gap: 0 60px; align-items: start; }
+  .poster .logo { max-width: 640px; }
+  .poster .einhorn { width: 220px; right: auto; left: 300px; top: 150px; }
+  .immer { grid-column: 2; grid-row: 1; margin-top: 30px; }
+  .immer .schwung { font-size: 38px; } .immer .fett { font-size: 44px; } .immer .gross { font-size: 80px; }
+  .heute { grid-column: 1 / -1; margin: 120px 0 0; padding: 0 0 60px 0; min-height: 330px; }
+  .heute .riesig { width: 140px; height: 140px; font-size: 92px; }
+  .heute .wann { font-size: 46px; } .heute .ort { font-size: 62px; } .heute .ort.lang { font-size: 50px; }
+  .heute .zeilen { font-size: 26px; }
+  .heute .dino { width: 330px; right: 40px; bottom: 0; }
+  .zwei { display: grid; grid-template-columns: 1fr 1fr; gap: 0 60px; }
+  .liste { columns: 2; column-gap: 60px; }
+  .liste li { break-inside: avoid; }
+  .titel .schwung { font-size: 44px; } .titel .fett { font-size: 64px; }
+  .kartenblatt .innen { max-width: 900px; }
+  dialog { margin: auto; }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .nadel.heute .scheibe { animation: glimmen 2.6s ease-in-out infinite alternate; }
+  @keyframes glimmen { to { box-shadow: 0 0 0 2px #2a1026, 0 0 0 14px rgba(246,196,83,.12), 0 0 40px 12px rgba(246,196,83,.75); } }
+}
+</style>
+</head>
+<body>
+
+<nav class="vorschau" id="vorschau" aria-label="Vorschau" hidden>
+  <span>Vorschau:</span>
+  <button type="button" data-zeit="" aria-pressed="true">heute</button>
+  <button type="button" data-zeit="2026-12-01T12:00" aria-pressed="false">1.12. mittags</button>
+  <button type="button" data-zeit="2026-12-09T18:30" aria-pressed="false">9.12. 18:30</button>
+  <button type="button" data-zeit="2026-12-09T21:00" aria-pressed="false">9.12. 21 Uhr</button>
+  <button type="button" data-zeit="2026-12-27T12:00" aria-pressed="false">27.12.</button>
+</nav>
+
+<header class="blatt poster">
+  <div class="grund" style="background-image:url(bilder/nacht-hoch.jpg)"></div>
+  <svg class="staub" data-sterne="91:400 83:462 94:566" data-punkte="70" data-noten="60:372 66:398 63:640 58:676"></svg>
+  <div class="innen">
+    <img class="logo" src="bilder/logo.webp" width="1280" height="476" alt="Der singende klingende Adventskalender" fetchpriority="high">
+    <img class="einhorn" src="bilder/einhorn-harfe.webp" width="440" height="577" alt="">
+    <div class="immer">
+      <p><span class="schwung">immer</span><span class="fett"><span class="gross">19</span> Uhr</span></p>
+      <p><span class="schwung">immer</span><span class="fett">an einem</span><span class="fett ein">anderen Ort</span></p>
+      <p><span class="schwung">immer</span><span class="fett">mit Musik</span><span class="fett ein">aus Schwerin</span></p>
+    </div>
+    <section class="heute" id="heute" aria-live="polite">
+      <div class="kopf"><span class="scheibe riesig"><span>23</span></span><div><span class="schwung wann">jeden Abend</span><span class="fett ort">um 19 Uhr</span></div></div>
+      <div class="zeilen"><p>1. bis 23. Dezember 2026, jeden Abend an einem anderen Ort in Schwerin. Eintritt frei.</p></div>
+    </section>
+  </div>
+</header>
+
+<main>
+<section class="blatt rueck hell" id="programm">
+  <svg class="staub" data-sterne="78:50 91:112" data-punkte="46" data-noten=""></svg>
+  <div class="innen">
+    <h2 class="titel"><span class="schwung">alle</span><span class="fett">23 Türchen</span></h2>
+    <p class="vorwort">Unter dem Motto <b>„musiKKlub-Feeling in der ganzen Stadt“</b> erwartet die Schweriner an jedem Abend eine musikalische Überraschung. Wo gespielt wird, steht hier. Wer spielt, verrät das Türchen am Tag selbst, morgens ab 6 Uhr.</p>
+    <p class="merken"><button class="strich" type="button" data-kalender="alle">Alle 23 Abende in den Kalender eintragen</button></p>
+    <ol class="liste" id="liste"><!-- ORTE-ANFANG -->
+      <li><div class="zeile"><span class="scheibe"><span>1</span></span>
+        <span><span class="name">Marianas Musikfenster</span><span class="adr">Lindenstraße 9</span></span>
+        <span class="tag">Di 1.12.</span></div></li>
+      <li><div class="zeile"><span class="scheibe"><span>2</span></span>
+        <span><span class="name">Goethe-Gymnasium</span><span class="adr">Johannes-R.-Becher-Straße 10, vor der Aula</span></span>
+        <span class="tag">Mi 2.12.</span></div></li>
+      <li><div class="zeile"><span class="scheibe"><span>3</span></span>
+        <span><span class="name">Ärztehaus</span><span class="adr">Rahlstedter Straße 29</span></span>
+        <span class="tag">Do 3.12.</span></div></li>
+      <li><div class="zeile"><span class="scheibe"><span>4</span></span>
+        <span><span class="name">Karl-Liebknecht-Platz</span><span class="adr">Karl-Liebknecht-Platz 6</span></span>
+        <span class="tag">Fr 4.12.</span></div></li>
+      <li><div class="zeile"><span class="scheibe"><span>5</span></span>
+        <span><span class="name">Mueßer Holz</span><span class="adr">Kepler Passage</span></span>
+        <span class="tag">Sa 5.12.</span></div></li>
+      <li><div class="zeile"><span class="scheibe"><span>6</span></span>
+        <span><span class="name">St. Anna</span><span class="adr">Klosterstraße 26</span></span>
+        <span class="tag">So 6.12.</span></div></li>
+      <li><div class="zeile"><span class="scheibe"><span>7</span></span>
+        <span><span class="name">Stephanus-Hof</span><span class="adr">Körnerstraße 7</span></span>
+        <span class="tag">Mo 7.12.</span></div></li>
+      <li><div class="zeile"><span class="scheibe"><span>8</span></span>
+        <span><span class="name">Kreativkaufhaus</span><span class="adr">Klöresgang 5</span></span>
+        <span class="tag">Di 8.12.</span></div></li>
+      <li><div class="zeile"><span class="scheibe"><span>9</span></span>
+        <span><span class="name">Demmlerplatz</span><span class="adr">Demmlerplatz 1</span></span>
+        <span class="tag">Mi 9.12.</span></div></li>
+      <li><div class="zeile"><span class="scheibe"><span>10</span></span>
+        <span><span class="name">PAUL Holzwerkstatt</span><span class="adr">Hof der Werderstraße 19a</span></span>
+        <span class="tag">Do 10.12.</span></div></li>
+      <li><div class="zeile"><span class="scheibe"><span>11</span></span>
+        <span><span class="name">Nachbarschaftstreff Weststadt</span><span class="adr">Lessingstraße 26a</span></span>
+        <span class="tag">Fr 11.12.</span></div></li>
+      <li><div class="zeile"><span class="scheibe"><span>12</span></span>
+        <span><span class="name">Hof Familie Scharf</span><span class="adr">Hof in der Bornhövedstraße 58</span></span>
+        <span class="tag">Sa 12.12.</span></div></li>
+      <li><div class="zeile"><span class="scheibe"><span>13</span></span>
+        <span><span class="name">Schwerin singt</span><span class="adr">Alter Garten 1</span></span>
+        <span class="tag">So 13.12.</span></div></li>
+      <li><div class="zeile"><span class="scheibe"><span>14</span></span>
+        <span><span class="name">Alte Post</span><span class="adr">vor der Alten Post am Berliner Platz 4</span></span>
+        <span class="tag">Mo 14.12.</span></div></li>
+      <li><div class="zeile"><span class="scheibe"><span>15</span></span>
+        <span><span class="name">Paulskirche</span><span class="adr">Am Packhof 8</span></span>
+        <span class="tag">Di 15.12.</span></div></li>
+      <li><div class="zeile"><span class="scheibe"><span>16</span></span>
+        <span><span class="name">Skatepark Lankow</span><span class="adr">Ratzeburger Straße 44</span></span>
+        <span class="tag">Mi 16.12.</span></div></li>
+      <li><div class="zeile"><span class="scheibe"><span>17</span></span>
+        <span><span class="name">Flotte Weihnachten</span><span class="adr">Werderstraße 140</span></span>
+        <span class="tag">Do 17.12.</span></div></li>
+      <li><div class="zeile"><span class="scheibe"><span>18</span></span>
+        <span><span class="name">Taschengarten Münzstraße</span><span class="adr">Münzstraße / Fischerstraße</span></span>
+        <span class="tag">Fr 18.12.</span></div></li>
+      <li><div class="zeile"><span class="scheibe"><span>19</span></span>
+        <span><span class="name">Freilichtmuseum</span><span class="adr">Alte Crivitzer Landstraße 13</span></span>
+        <span class="tag">Sa 19.12.</span></div></li>
+      <li><div class="zeile"><span class="scheibe"><span>20</span></span>
+        <span><span class="name">Hotel Speicher</span><span class="adr">Uferpromenade</span></span>
+        <span class="tag">So 20.12.</span></div></li>
+      <li><div class="zeile"><span class="scheibe"><span>21</span></span>
+        <span><span class="name">Domportal</span><span class="adr">Am Dom</span></span>
+        <span class="tag">Mo 21.12.</span></div></li>
+      <li><div class="zeile"><span class="scheibe"><span>22</span></span>
+        <span><span class="name">Café Löwenherz</span><span class="adr">Obotritenring 245</span></span>
+        <span class="tag">Di 22.12.</span></div></li>
+      <li><div class="zeile"><span class="scheibe"><span>23</span></span>
+        <span><span class="name">Ziegenmarkt</span><span class="adr">Ziegenmarkt 11</span></span>
+        <span class="tag">Mi 23.12.</span></div></li>
+      
+<!-- ORTE-ENDE --></ol>
+  </div>
+</section>
+
+<section class="blatt kartenblatt" id="karte">
+  <svg class="staub" data-sterne="82:52 92:120" data-punkte="26" data-noten="70:96"></svg>
+  <div class="innen">
+    <h2 class="titel"><span class="schwung">quer durch</span><span class="fett">die Stadt</span></h2>
+    <div class="wahl">
+      <button type="button" data-karte="innenstadt" aria-pressed="true">Innenstadt</button>
+      <button type="button" data-karte="stadt" aria-pressed="false">Ganze Stadt</button>
+    </div>
+    <div class="karte" id="kartenfeld"><img id="kartenbild" src="bilder/karte-innenstadt.jpg" width="1500" height="1350" loading="lazy" decoding="async" alt="Karte von Schwerin mit den Orten der Türchen"></div>
+    <p class="quelle">Karte: © OpenStreetMap-Mitwirkende</p>
+  </div>
+</section>
+
+<section class="blatt rueck hell abend" id="abend">
+  <svg class="staub" data-sterne="80:48 92:112 9:590 90:640" data-punkte="44" data-noten="72:90"></svg>
+  <div class="innen">
+    <h2 class="titel"><span class="schwung">so läuft</span><span class="fett">ein Abend</span></h2>
+    <ul id="regeln">
+      <li>Um 19 Uhr geht es los, nach etwa einer halben Stunde ist Schluss.</li>
+      <li>Gespielt wird draußen. Zieh dich warm an.</li>
+      <li>Der Eintritt ist frei. Du brauchst keine Karte und keine Anmeldung.</li>
+      <li>Mitsingen ist ausdrücklich erwünscht.</li>
+    </ul>
+    <img class="duett" src="bilder/duett.webp" width="500" height="339" loading="lazy" decoding="async" alt="">
+  </div>
+</section>
+</main>
+
+<footer class="blatt fuss">
+  <div class="grund" style="background-image:url(bilder/nacht-quer.jpg)"></div>
+  <svg class="staub" data-sterne="12:44 88:58 82:210" data-punkte="40" data-noten="16:150"></svg>
+  <img class="mk" src="bilder/musikklub.webp" width="380" height="222" loading="lazy" decoding="async" alt="musiKKlub">
+  <p>Freundlich unterstützt von: Zirkus Schwerin e.V., Landeshauptstadt Schwerin, Musik- und Kunstschule Ataraxia, Schweriner Bürgerstiftung, Sparkasse Schwerin, Hauspost und Nahverkehr Schwerin</p>
+  <p class="netz"><a href="https://www.musikklub.com/">www.musiKKlub.com</a></p>
+  <p class="recht"><a href="https://www.musikklub.com/impressum">Impressum</a> <a href="datenschutz.html">Datenschutz</a></p>
+</footer>
+
+<dialog id="fenster" aria-labelledby="tuer-ort"></dialog>
+
+<script type="module" src="seite.js"></script>
+</body>
+</html>
