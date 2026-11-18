@@ -1,6 +1,6 @@
 // Anzeige und Klicks. Die Regeln selbst stehen in logik.js, die Angaben in daten.js.
 import { JAHR, TAGE, KARTEN } from "./daten.js";
-import { OEFFNET_UM, istOffen, lage, actVon, kalenderdatei, darfVorschau, vorschauZeit, stand } from "./logik.js";
+import { OEFFNET_UM, istOffen, lage, actVon, darfVorschau, vorschauZeit, stand } from "./logik.js";
 
 document.documentElement.classList.add("js");
 // Vorschau-Angaben in der Adresse (?zeit=, ?offen=, ?karte=, ?vorschau) zählen nur auf dem eigenen Rechner
@@ -93,22 +93,11 @@ function oeffne(n) {
     <span class="fett ort ${langerOrt(t)}" id="tuer-ort">${t.ort}</span>
     <p>${t.adresse}</p><p>19 Uhr, Eintritt frei, etwa 30 Minuten</p>
     ${inhalt}${pfeil(t)}
-    <p class="merken"><button class="strich" type="button" data-kalender="${n}">In den Kalender eintragen</button></p>
+    <p class="merken"><a class="strich" href="kalender/adventskalender-tuerchen-${n}.ics">In den Kalender eintragen</a></p>
     <img class="figur" src="bilder/${figuren[n % figuren.length]}.webp" alt=""></div></div>`;
   $("#fenster").showModal();
 }
 
-function ladeKalender(welche) {
-  const tage = welche === "alle" ? TAGE : [TAGE[welche - 1]];
-  const link = document.createElement("a");
-  link.hidden = true;
-  link.href = URL.createObjectURL(new Blob([kalenderdatei(tage, JETZT)], { type: "text/calendar;charset=utf-8" }));
-  link.download = welche === "alle" ? "adventskalender-schwerin-2026.ics" : `adventskalender-tuerchen-${welche}.ics`;
-  // Der Link muss im Dokument hängen und eine Weile gültig bleiben: das iPhone fragt erst nach, bevor es die Datei holt
-  document.body.append(link);
-  link.click();
-  setTimeout(() => { URL.revokeObjectURL(link.href); link.remove(); }, 60000);
-}
 
 // Goldstaub, Sterne und Noten wie auf dem Poster, mit festem Zufall, damit jedes Blatt gleich bleibt
 function streue(svg, saat) {
@@ -141,12 +130,6 @@ document.addEventListener("click", (e) => {
     JETZT = vorschauZeit(v.dataset.zeit) || new Date(); L = lage(JETZT);
     document.querySelectorAll("[data-zeit]").forEach((b) => b.setAttribute("aria-pressed", b === v));
     zeigeHeute(); zeigeListe(); return zeigeKarte(karteJetzt);
-  }
-  const kal = e.target.closest("[data-kalender]");
-  if (kal) {
-    // In den eingebauten Browsern von Instagram und Facebook passiert beim Herunterladen oft nichts, deshalb ein Hinweis
-    if (!kal.parentNode.querySelector(".hinweis")) kal.insertAdjacentHTML("afterend", `<span class="hinweis" role="status">Tut sich nichts? Öffne die Seite in Safari oder Chrome.</span>`);
-    return ladeKalender(kal.dataset.kalender === "alle" ? "alle" : +kal.dataset.kalender);
   }
   const n = e.target.closest("[data-n]"); if (n) return oeffne(+n.dataset.n);
   const k = e.target.closest("[data-karte]"); if (k) return zeigeKarte(k.dataset.karte);

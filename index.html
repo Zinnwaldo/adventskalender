@@ -37,7 +37,7 @@
 * { box-sizing: border-box; }
 [hidden] { display: none !important; }
 /* Knöpfe, die ohne JavaScript nichts tun würden, erscheinen dann gar nicht erst */
-html:not(.js) .merken, html:not(.js) .wahl { display: none; }
+html:not(.js) .wahl { display: none; }
 html { scroll-behavior: auto; }
 body { margin: 0; background: var(--petrol-tief); color: var(--creme); font: 19px/1.35 var(--text); letter-spacing: .01em; -webkit-font-smoothing: antialiased; }
 img { display: block; max-width: 100%; height: auto; }
@@ -143,7 +143,6 @@ button { font: inherit; color: inherit; cursor: pointer; }
 
 .strich { all: unset; cursor: pointer; display: inline-block; box-sizing: border-box; min-height: 44px; padding: 9px 0; color: var(--gold); font-size: 20px; text-decoration: underline dashed 2px; text-underline-offset: 6px; }
 .tuer .merken { margin-top: 9px; max-width: 62%; }
-.merken .hinweis { display: block; font-size: 16px; opacity: .9; }
 .vorwort + .merken { margin: -15px 0 13px; }
 
 /* ---------- Geöffnetes Türchen ---------- */
@@ -257,7 +256,7 @@ button:focus-visible, a:focus-visible { outline: 3px solid var(--gold) !importan
   <div class="innen">
     <h2 class="titel"><span class="schwung">alle</span><span class="fett">23 Türchen</span></h2>
     <p class="vorwort">Unter dem Motto <b>„musiKKlub-Feeling in der ganzen Stadt“</b> erwartet die Schweriner an jedem Abend eine musikalische Überraschung. Wo gespielt wird, steht hier. Wer spielt, verrät das Türchen am Tag selbst, morgens ab 6 Uhr.</p>
-    <p class="merken"><button class="strich" type="button" data-kalender="alle">Alle 23 Abende in den Kalender eintragen</button></p>
+    <p class="merken"><a class="strich" href="kalender/adventskalender-schwerin-2026.ics">Alle 23 Abende in den Kalender eintragen</a></p>
     <ol class="liste" id="liste"><!-- ORTE-ANFANG -->
       <li><div class="zeile"><span class="scheibe"><span>1</span></span>
         <span><span class="name">Marianas Musikfenster</span><span class="adr">Lindenstraße 9</span></span>

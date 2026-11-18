@@ -1,0 +1,19 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//musiKKlub//Singender klingender Adventskalender//DE
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:Singender klingender Adventskalender
+BEGIN:VEVENT
+UID:tuerchen-3-2026@musikklub.com
+DTSTAMP:20260101T000000Z
+DTSTART:20261203T180000Z
+DTEND:20261203T183000Z
+SUMMARY:Türchen 3: Ärztehaus
+LOCATION:Ärztehaus\, Rahlstedter Straße 29\, Schwerin
+GEO:53.647925;11.36507
+DESCRIPTION:Der singende klingende Adventskalender. Wer spielt\, verrät 
+ das Türchen am Tag selbst ab 6 Uhr. Eintritt frei\, draußen\, etwa 30 M
+ inuten.\nwww.musiKKlub.com
+END:VEVENT
+END:VCALENDAR

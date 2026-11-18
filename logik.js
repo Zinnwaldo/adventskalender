@@ -67,7 +67,8 @@ export function vorschauZeit(text) {
 }
 
 /* KALENDER-ANFANG */
-// Baut eine Kalenderdatei (iCalendar, .ics) für die übergebenen Türchen.
+// Baut eine Kalenderdatei (iCalendar, .ics) für die übergebenen Türchen. Wird vom Bauschritt benutzt (werkzeug/baue.mjs),
+// die fertigen Dateien liegen in kalender/. Auf der Seite selbst läuft diese Funktion nicht mehr.
 // Der Act steht nur drin, wenn das Türchen schon offen ist, sonst würde die Datei die Überraschung verraten.
 export function kalenderdatei(tage, jetzt) {
   const zwei = (z) => String(z).padStart(2, "0");
