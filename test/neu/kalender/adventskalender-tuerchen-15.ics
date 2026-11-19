@@ -1,0 +1,19 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//musiKKlub//Singender klingender Adventskalender//DE
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:Singender klingender Adventskalender
+BEGIN:VEVENT
+UID:tuerchen-15-2026@musikklub.com
+DTSTAMP:20260101T000000Z
+DTSTART:20261215T180000Z
+DTEND:20261215T183000Z
+SUMMARY:Türchen 15: Paulskirche
+LOCATION:Paulskirche\, Am Packhof 8\, Schwerin
+GEO:53.632027;11.40845
+DESCRIPTION:Der singende klingende Adventskalender. Wer spielt\, verrät 
+ das Türchen am Tag selbst ab 6 Uhr. Eintritt frei\, draußen\, etwa 30 M
+ inuten.\nwww.musiKKlub.com
+END:VEVENT
+END:VCALENDAR
