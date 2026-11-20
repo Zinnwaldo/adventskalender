@@ -1,5 +1,9 @@
 // Reine Logik ohne Browser: Zeit, Türchen-Regel, Kalenderdatei. Wird von seite.js und von den Tests benutzt.
-import { JAHR, LETZTER, ACTS } from "./daten.js";
+import { JAHR, LETZTER, ACTS, TAGE } from "./daten.js";
+
+// Wann ein Abend beginnt (volle Stunde in Schwerin) und wie die Seite das nennt. Jeder Abend dauert eine Stunde.
+export const beginn = (t) => t?.uhr ?? 19;
+export const uhrzeit = (t) => (t?.uhr ? `schon um ${t.uhr} Uhr` : "19 Uhr");
 
 // Ab wann ist ein Türchen offen, also wann verraten Seite und Kalender, wer spielt?
 // Karstens Regel (18.11.2026): am jeweiligen Tag morgens um 6 Uhr, und zwar nach Schweriner Uhr.
@@ -22,7 +26,7 @@ export function lage(jetzt) {
   const b = berlin(jetzt), m = marke_von(jetzt);
   if (m < marke(JAHR, 12, 1)) return { phase: "vor", tage: Math.round((Date.UTC(JAHR, 11, 1) - Date.UTC(b.jahr, b.monat - 1, b.tag)) / 864e5) };
   if (m >= marke(JAHR, 12, LETZTER, 20)) return { phase: "nach" };
-  const vorbei = b.stunde >= 20;
+  const vorbei = b.stunde >= beginn(TAGE[b.tag - 1]) + 1; // eine Stunde nach Beginn zeigt die Seite den nächsten Abend
   return { phase: "laeuft", n: b.tag + (vorbei ? 1 : 0), morgen: vorbei, heuteNr: b.tag };
 }
 
@@ -92,13 +96,15 @@ export function kalenderdatei(tage, jetzt) {
     zeilen.push("BEGIN:VEVENT",
       `UID:tuerchen-${t.n}-${JAHR}@musikklub.com`,
       `DTSTAMP:${stempel}`,
-      // 19:00 Uhr in Schwerin ist im Dezember 18:00 Uhr Weltzeit (UTC), deshalb das Z am Ende
-      `DTSTART:${JAHR}12${zwei(t.n)}T180000Z`,
-      `DTEND:${JAHR}12${zwei(t.n)}T183000Z`,
+      // Fassung 1: seit dem 20.11.2026 dauert ein Abend im Kalender eine Stunde statt 30 Minuten
+      "SEQUENCE:1",
+      // Schwerin ist im Dezember der Weltzeit (UTC) eine Stunde voraus: 19:00 Uhr dort ist 18:00 Uhr UTC, deshalb das Z am Ende
+      `DTSTART:${JAHR}12${zwei(t.n)}T${zwei(beginn(t) - 1)}0000Z`,
+      `DTEND:${JAHR}12${zwei(t.n)}T${zwei(beginn(t))}0000Z`,
       `SUMMARY:${sauber(`Türchen ${t.n}: ${t.ort}`)}`,
       `LOCATION:${sauber(`${t.ort}, ${t.adresse}, Schwerin`)}`,
       `GEO:${t.lat};${t.lon}`,
-      `DESCRIPTION:${sauber(`Der singende klingende Adventskalender. ${act} Eintritt frei, draußen, etwa 30 Minuten.\nwww.musiKKlub.com`)}`,
+      `DESCRIPTION:${sauber(`Der singende klingende Adventskalender. ${act} Eintritt frei, draußen, eine gute Stunde.\nwww.musiKKlub.com`)}`,
       "END:VEVENT");
   }
   zeilen.push("END:VCALENDAR");
@@ -113,9 +119,9 @@ export function googleLink(t) {
   const teile = {
     action: "TEMPLATE",
     text: `Türchen ${t.n}: ${t.ort}`,
-    dates: `${tag}T180000Z/${tag}T183000Z`,
+    dates: `${tag}T${beginn(t) - 1}0000Z/${tag}T${beginn(t)}0000Z`,
     location: `${t.ort}, ${t.adresse}, Schwerin`,
-    details: "Der singende klingende Adventskalender. Eintritt frei, draußen, etwa 30 Minuten.\nwww.musiKKlub.com",
+    details: "Der singende klingende Adventskalender. Eintritt frei, draußen, eine gute Stunde.\nwww.musiKKlub.com",
   };
   return "https://calendar.google.com/calendar/render?" + Object.entries(teile).map(([k, w]) => `${k}=${k === "dates" ? w : encodeURIComponent(w)}`).join("&");
 }

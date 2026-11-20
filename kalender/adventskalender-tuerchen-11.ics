@@ -6,14 +6,15 @@ METHOD:PUBLISH
 X-WR-CALNAME:Singender klingender Adventskalender
 BEGIN:VEVENT
 UID:tuerchen-11-2026@musikklub.com
-DTSTAMP:20260101T000000Z
+DTSTAMP:20261120T000000Z
+SEQUENCE:1
 DTSTART:20261211T180000Z
-DTEND:20261211T183000Z
+DTEND:20261211T190000Z
 SUMMARY:Türchen 11: Nachbarschaftstreff Weststadt
 LOCATION:Nachbarschaftstreff Weststadt\, Lessingstraße 26a\, Schwerin
 GEO:53.634552;11.392194
 DESCRIPTION:Der singende klingende Adventskalender. Wer spielt\, verrät 
- das Türchen am Tag selbst ab 6 Uhr. Eintritt frei\, draußen\, etwa 30 M
- inuten.\nwww.musiKKlub.com
+ das Türchen am Tag selbst ab 6 Uhr. Eintritt frei\, draußen\, eine gute
+  Stunde.\nwww.musiKKlub.com
 END:VEVENT
 END:VCALENDAR

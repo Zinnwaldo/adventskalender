@@ -1,6 +1,6 @@
 // Anzeige und Klicks. Die Regeln selbst stehen in logik.js, die Angaben in daten.js.
 import { JAHR, TAGE, KARTEN } from "./daten.js";
-import { OEFFNET_UM, istOffen, lage, actVon, darfVorschau, vorschauZeit, stand, googleLink } from "./logik.js";
+import { OEFFNET_UM, istOffen, lage, actVon, darfVorschau, vorschauZeit, stand, googleLink, beginn, uhrzeit } from "./logik.js";
 
 document.documentElement.classList.add("js");
 // Vorschau-Angaben in der Adresse (?zeit=, ?offen=, ?karte=, ?vorschau) zählen nur auf dem eigenen Rechner
@@ -33,7 +33,7 @@ function zeigeHeute() {
   if (L.phase === "vor") {
     const t = TAGE[0];
     $("#heute").innerHTML = `<div class="kopf">${scheibe(L.tage, "riesig")}<div><span class="schwung wann">noch</span><span class="fett ort">${L.tage === 1 ? "ein Tag" : "Tage"}</span></div></div>
-      <div class="zeilen"><p>Das erste Türchen öffnet sich am <b>${wochentag(1, true)}, 1. Dezember, um 19 Uhr</b>: ${t.ort}, ${t.adresse}.</p></div>${pfeil(t)}${dino}`;
+      <div class="zeilen"><p>Das erste Türchen öffnet sich am <b>${wochentag(1, true)}, 1. Dezember, um ${beginn(t)} Uhr</b>: ${t.ort}, ${t.adresse}.</p></div>${pfeil(t)}${dino}`;
   } else if (L.phase === "nach") {
     $("#heute").innerHTML = `<div class="kopf">${scheibe(24, "riesig")}<div><span class="schwung wann">frohe</span><span class="fett ort">Weihnachten</span></div></div>
       <div class="zeilen"><p>Alle 23 Türchen sind gesungen und geklungen. Danke an alle, die dabei waren. Bis zum nächsten Advent!</p></div>${dino}`;
@@ -42,7 +42,7 @@ function zeigeHeute() {
     const name = actVon(t.n, JETZT);
     const act = istOffen(t.n, JETZT) ? (name ? `Es spielt <b>${name}</b>.` : "Wer spielt, steht noch nicht fest.") : `Wer spielt, verrät das Türchen ${L.morgen ? "morgen " : ""}ab ${OEFFNET_UM} Uhr.`;
     $("#heute").innerHTML = `<div class="kopf">${scheibe(t.n, "riesig")}<div><span class="schwung wann">${L.morgen ? "morgen Abend" : "heute Abend"}</span><span class="fett ort ${langerOrt(t)}">${t.ort}</span></div></div>
-      <div class="zeilen"><p>${t.adresse}</p><p>19 Uhr, Eintritt frei</p><p>${act}</p></div>${pfeil(t)}${dino}`;
+      <div class="zeilen"><p>${t.adresse}</p><p>${uhrzeit(t)}, Eintritt frei</p><p>${act}</p></div>${pfeil(t)}${dino}`;
   }
   passeEin($("#heute .ort"));
 }
@@ -54,7 +54,7 @@ function zeigeListe() {
     const name = actVon(t.n, JETZT);
     const spielt = name ? `<span class="spielt">${war ? "Es spielte" : "Es spielt"} ${name}</span>` : "";
     return `<li class="${heute ? "jetzt" : war ? "war" : ""}"><button type="button" data-n="${t.n}">${scheibe(t.n)}
-      <span><span class="name">${t.ort}</span><span class="adr">${t.adresse}</span>${spielt}</span>
+      <span><span class="name">${t.ort}</span><span class="adr">${t.adresse}${t.uhr ? ", " + uhrzeit(t) : ""}</span>${spielt}</span>
       <span class="tag">${heute ? (L.morgen ? "morgen" : "heute") : wochentag(t.n) + " " + t.n + ".12."}</span></button></li>`;
   }).join("");
 }
@@ -104,7 +104,7 @@ function oeffne(n) {
     <button class="zu" type="button" data-zu>schließen</button>
     <span class="schwung datum">${wochentag(n, true)}, ${n}. Dezember</span>
     <span class="fett ort ${langerOrt(t)}" id="tuer-ort">${t.ort}</span>
-    <p>${t.adresse}</p><p>19 Uhr, Eintritt frei, etwa 30 Minuten</p>
+    <p>${t.adresse}</p><p>${uhrzeit(t)}, Eintritt frei, eine gute Stunde</p>
     ${inhalt}${pfeil(t)}
     <details class="merken"><summary class="strich">In den Kalender eintragen</summary>
       <a class="strich" href="${googleLink(t)}" target="_blank" rel="noopener">Google Kalender</a>

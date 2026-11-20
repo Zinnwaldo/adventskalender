@@ -6,14 +6,15 @@ METHOD:PUBLISH
 X-WR-CALNAME:Singender klingender Adventskalender
 BEGIN:VEVENT
 UID:tuerchen-5-2026@musikklub.com
-DTSTAMP:20260101T000000Z
+DTSTAMP:20261120T000000Z
+SEQUENCE:1
 DTSTART:20261205T180000Z
-DTEND:20261205T183000Z
+DTEND:20261205T190000Z
 SUMMARY:Türchen 5: Mueßer Holz
 LOCATION:Mueßer Holz\, Kepler Passage\, Schwerin
 GEO:53.591134;11.467235
 DESCRIPTION:Der singende klingende Adventskalender. Wer spielt\, verrät 
- das Türchen am Tag selbst ab 6 Uhr. Eintritt frei\, draußen\, etwa 30 M
- inuten.\nwww.musiKKlub.com
+ das Türchen am Tag selbst ab 6 Uhr. Eintritt frei\, draußen\, eine gute
+  Stunde.\nwww.musiKKlub.com
 END:VEVENT
 END:VCALENDAR

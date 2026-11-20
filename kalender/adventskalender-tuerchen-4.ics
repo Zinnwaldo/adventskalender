@@ -6,14 +6,15 @@ METHOD:PUBLISH
 X-WR-CALNAME:Singender klingender Adventskalender
 BEGIN:VEVENT
 UID:tuerchen-4-2026@musikklub.com
-DTSTAMP:20260101T000000Z
+DTSTAMP:20261120T000000Z
+SEQUENCE:1
 DTSTART:20261204T180000Z
-DTEND:20261204T183000Z
+DTEND:20261204T190000Z
 SUMMARY:Türchen 4: Karl-Liebknecht-Platz
 LOCATION:Karl-Liebknecht-Platz\, Karl-Liebknecht-Platz 6\, Schwerin
 GEO:53.622907;11.404584
 DESCRIPTION:Der singende klingende Adventskalender. Wer spielt\, verrät 
- das Türchen am Tag selbst ab 6 Uhr. Eintritt frei\, draußen\, etwa 30 M
- inuten.\nwww.musiKKlub.com
+ das Türchen am Tag selbst ab 6 Uhr. Eintritt frei\, draußen\, eine gute
+  Stunde.\nwww.musiKKlub.com
 END:VEVENT
 END:VCALENDAR

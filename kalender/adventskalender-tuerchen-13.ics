@@ -6,14 +6,15 @@ METHOD:PUBLISH
 X-WR-CALNAME:Singender klingender Adventskalender
 BEGIN:VEVENT
 UID:tuerchen-13-2026@musikklub.com
-DTSTAMP:20260101T000000Z
-DTSTART:20261213T180000Z
-DTEND:20261213T183000Z
+DTSTAMP:20261120T000000Z
+SEQUENCE:1
+DTSTART:20261213T160000Z
+DTEND:20261213T170000Z
 SUMMARY:Türchen 13: Schwerin singt
 LOCATION:Schwerin singt\, Alter Garten 1\, Schwerin
 GEO:53.6266;11.416541
 DESCRIPTION:Der singende klingende Adventskalender. Wer spielt\, verrät 
- das Türchen am Tag selbst ab 6 Uhr. Eintritt frei\, draußen\, etwa 30 M
- inuten.\nwww.musiKKlub.com
+ das Türchen am Tag selbst ab 6 Uhr. Eintritt frei\, draußen\, eine gute
+  Stunde.\nwww.musiKKlub.com
 END:VEVENT
 END:VCALENDAR

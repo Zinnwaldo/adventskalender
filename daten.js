@@ -1,5 +1,6 @@
 // Alle Angaben zu den 23 Abenden. Wer hier etwas ändert, ruft danach `node werkzeug/baue.mjs` auf.
 export const JAHR = 2026, LETZTER = 23;
+// Ein Abend beginnt um 19 Uhr. Nur wo es anders ist, steht die Stunde als `uhr` dabei.
 export const TAGE = [
   { n: 1,  ort: "Marianas Musikfenster", adresse: "Lindenstraße 9", lat: 53.632644, lon: 11.418544 },
   { n: 2,  ort: "Goethe-Gymnasium", adresse: "Johannes-R.-Becher-Straße 10, vor der Aula", lat: 53.637029, lon: 11.393113 },
@@ -13,7 +14,7 @@ export const TAGE = [
   { n: 10, ort: "PAUL Holzwerkstatt", adresse: "Hof der Werderstraße 19a", lat: 53.636233, lon: 11.421565 },
   { n: 11, ort: "Nachbarschaftstreff Weststadt", adresse: "Lessingstraße 26a", lat: 53.634552, lon: 11.392194 },
   { n: 12, ort: "Hof Familie Scharf", adresse: "Hof in der Bornhövedstraße 58", lat: 53.634369, lon: 11.427547 },
-  { n: 13, ort: "Schwerin singt", adresse: "Alter Garten 1", lat: 53.6266, lon: 11.416541 },
+  { n: 13, ort: "Schwerin singt", adresse: "Alter Garten 1", lat: 53.6266, lon: 11.416541, uhr: 17 },
   { n: 14, ort: "Alte Post", adresse: "vor der Alten Post am Berliner Platz 4", lat: 53.598463, lon: 11.448603 },
   { n: 15, ort: "Paulskirche", adresse: "Am Packhof 8", lat: 53.632027, lon: 11.40845 },
   { n: 16, ort: "Skatepark Lankow", adresse: "Ratzeburger Straße 44", lat: 53.651721, lon: 11.360642 },
