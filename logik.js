@@ -105,3 +105,17 @@ export function kalenderdatei(tage, jetzt) {
   return zeilen.map(falten).join("\r\n") + "\r\n";
 }
 /* KALENDER-ENDE */
+
+// Derselbe Abend als Link für den Google Kalender. Ohne Act, weil der Link schon vor dem Öffnen des Türchens sichtbar ist.
+export function googleLink(t) {
+  const tag = `${JAHR}12${String(t.n).padStart(2, "0")}`;
+  // Leerzeichen als %20 wie im Link, der auf Pixel und iPhone ausprobiert wurde
+  const teile = {
+    action: "TEMPLATE",
+    text: `Türchen ${t.n}: ${t.ort}`,
+    dates: `${tag}T180000Z/${tag}T183000Z`,
+    location: `${t.ort}, ${t.adresse}, Schwerin`,
+    details: "Der singende klingende Adventskalender. Eintritt frei, draußen, etwa 30 Minuten.\nwww.musiKKlub.com",
+  };
+  return "https://calendar.google.com/calendar/render?" + Object.entries(teile).map(([k, w]) => `${k}=${k === "dates" ? w : encodeURIComponent(w)}`).join("&");
+}
