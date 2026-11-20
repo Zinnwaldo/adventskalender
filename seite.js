@@ -16,6 +16,18 @@ const pfeil = (t) => `<span class="pfeilhuelle"><a class="pfeil" href="${weg(t)}
 let L = lage(JETZT);
 const langerOrt = (t) => t.ort.length > 15 ? "lang" : "";
 
+// Verkleinert einen einzeiligen Ortsnamen, bis er sichtbar in sein Blatt passt. Gemessen wird die gezeichnete Breite,
+// weil die Schrift auf 80 % gestaucht ist. So passt auch ein Name, der später erst eingetragen wird.
+function passeEin(el) {
+  if (!el || el.classList.contains("lang")) return; // lange Namen brechen um und haben ihre eigene Größe
+  el.style.fontSize = "";
+  const rand = el.closest(".blatt, .tuer").getBoundingClientRect().right - 22; // innerhalb des gestrichelten Rahmens
+  const ende = () => { const r = el.getBoundingClientRect(); return r.left + el.scrollWidth * (r.width / el.offsetWidth); };
+  let groesse = parseFloat(getComputedStyle(el).fontSize);
+  while (ende() > rand && groesse > 16) el.style.fontSize = (groesse -= 1) + "px";
+}
+const passeOrteEin = () => { passeEin($("#heute .ort")); passeEin($("#fenster[open] #tuer-ort")); };
+
 function zeigeHeute() {
   const dino = `<img class="dino" src="bilder/dino-sax.webp" width="520" height="520" alt="">`;
   if (L.phase === "vor") {
@@ -32,6 +44,7 @@ function zeigeHeute() {
     $("#heute").innerHTML = `<div class="kopf">${scheibe(t.n, "riesig")}<div><span class="schwung wann">${L.morgen ? "morgen Abend" : "heute Abend"}</span><span class="fett ort ${langerOrt(t)}">${t.ort}</span></div></div>
       <div class="zeilen"><p>${t.adresse}</p><p>19 Uhr, Eintritt frei</p><p>${act}</p></div>${pfeil(t)}${dino}`;
   }
+  passeEin($("#heute .ort"));
 }
 
 function zeigeListe() {
@@ -98,6 +111,9 @@ function oeffne(n) {
       <a class="strich" href="kalender/adventskalender-tuerchen-${n}.ics">Apple, Outlook und andere</a></details>
     <img class="figur" src="bilder/${figuren[n % figuren.length]}.webp" alt=""></div></div>`;
   $("#fenster").showModal();
+  passeEin($("#tuer-ort"));
+  // Sonst springt der Fokus auf "schließen", und der Browser zeichnet dort manchmal ungefragt einen Rahmen
+  $("#fenster").focus();
 }
 
 
@@ -123,6 +139,8 @@ function stern(r, z = Math.random) {
 }
 
 zeigeHeute(); zeigeListe(); zeigeKarte(frage.get("karte") || "innenstadt");
+// Der Name wird erst nach dem Laden der Schrift richtig gemessen, und beim Drehen des Handys ändert sich der Platz
+passeOrteEin(); document.fonts.ready.then(passeOrteEin); window.addEventListener("resize", passeOrteEin);
 // Die Regeln stehen fest im HTML, hier bekommen sie nur ihren handgezeichneten Stern
 document.querySelectorAll("#regeln li").forEach((li) => li.insertAdjacentHTML("afterbegin", `<svg viewBox="-14 -14 28 28">${stern(11)}</svg>`));
 document.querySelectorAll(".staub").forEach((s, i) => streue(s, 7 + i * 131));
