@@ -6,16 +6,17 @@ METHOD:PUBLISH
 X-WR-CALNAME:Singender klingender Adventskalender
 BEGIN:VEVENT
 UID:tuerchen-2-2026@musikklub.com
-DTSTAMP:20261120T000000Z
-SEQUENCE:1
+DTSTAMP:20261121T000000Z
+SEQUENCE:2
 DTSTART:20261202T180000Z
 DTEND:20261202T190000Z
 SUMMARY:Türchen 2: Goethe-Gymnasium
 LOCATION:Goethe-Gymnasium\, Johannes-R.-Becher-Straße 10\, vor der Aula\
  , Schwerin
 GEO:53.637029;11.393113
-DESCRIPTION:Der singende klingende Adventskalender. Wer spielt\, verrät 
- das Türchen am Tag selbst ab 6 Uhr. Eintritt frei\, draußen\, eine gute
-  Stunde.\nwww.musiKKlub.com
+DESCRIPTION:Der singende klingende Adventskalender. Wer spielt\, steht am
+  Tag selbst ab 6 Uhr auf adventskalender.musikklub.com. Eintritt frei\, d
+ raußen\, eine gute Stunde.
+URL:https://adventskalender.musikklub.com/
 END:VEVENT
 END:VCALENDAR

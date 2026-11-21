@@ -33,7 +33,7 @@ function zeigeHeute() {
   if (L.phase === "vor") {
     const t = TAGE[0];
     $("#heute").innerHTML = `<div class="kopf">${scheibe(L.tage, "riesig")}<div><span class="schwung wann">noch</span><span class="fett ort">${L.tage === 1 ? "ein Tag" : "Tage"}</span></div></div>
-      <div class="zeilen"><p>Das erste Türchen öffnet sich am <b>${wochentag(1, true)}, 1. Dezember, um ${beginn(t)} Uhr</b>: ${t.ort}, ${t.adresse}.</p></div>${pfeil(t)}${dino}`;
+      <div class="zeilen"><p>Los geht es am <b>${wochentag(1, true)}, 1. Dezember, um ${beginn(t)} Uhr</b>: ${t.ort}, ${t.adresse}. Eintritt frei.</p></div>${pfeil(t)}${dino}`;
   } else if (L.phase === "nach") {
     $("#heute").innerHTML = `<div class="kopf">${scheibe(24, "riesig")}<div><span class="schwung wann">frohe</span><span class="fett ort">Weihnachten</span></div></div>
       <div class="zeilen"><p>Alle 23 Türchen sind gesungen und geklungen. Danke an alle, die dabei waren. Bis zum nächsten Advent!</p></div>${dino}`;
@@ -41,7 +41,7 @@ function zeigeHeute() {
     const t = TAGE[L.n - 1];
     const name = actVon(t.n, JETZT);
     const act = istOffen(t.n, JETZT) ? (name ? `Es spielt <b>${name}</b>.` : "Wer spielt, steht noch nicht fest.") : `Wer spielt, verrät das Türchen ${L.morgen ? "morgen " : ""}ab ${OEFFNET_UM} Uhr.`;
-    $("#heute").innerHTML = `<div class="kopf">${scheibe(t.n, "riesig")}<div><span class="schwung wann">${L.morgen ? "morgen Abend" : "heute Abend"}</span><span class="fett ort ${langerOrt(t)}">${t.ort}</span></div></div>
+    $("#heute").innerHTML = `<button type="button" class="kopf" data-n="${t.n}" aria-label="Türchen ${t.n} öffnen: ${L.morgen ? "morgen" : "heute"} Abend, ${t.ort}">${scheibe(t.n, "riesig")}<span class="daneben"><span class="schwung wann">${L.morgen ? "morgen Abend" : "heute Abend"}</span><span class="fett ort ${langerOrt(t)}">${t.ort}</span></span></button>
       <div class="zeilen"><p>${t.adresse}</p><p>${uhrzeit(t)}, Eintritt frei</p><p>${act}</p></div>${pfeil(t)}${dino}`;
   }
   passeEin($("#heute .ort"));
@@ -85,7 +85,8 @@ function zeigeKarte(name) {
   for (const p of punkte) {
     const b = document.createElement("button");
     b.type = "button"; b.dataset.n = p.t.n;
-    b.className = "nadel" + (p.heute ? " heute" : "") + (p.draussen ? " rand" : "");
+    b.className = "nadel" + (p.heute ? " jetzt" : "") // nicht "heute": so heißt schon der Heute-Block, dessen Abstände sonst auch hier greifen
+       + (p.draussen ? " rand" : "");
     b.style.cssText = `left:${Math.min(B - 30, Math.max(30, p.x)) / B * 100}%;top:${p.y / H * 100}%;z-index:${p.heute ? 3 : 1}`;
     b.setAttribute("aria-label", `Türchen ${p.t.n}, ${p.t.ort}`);
     b.innerHTML = scheibe(p.t.n);
@@ -97,23 +98,27 @@ function zeigeKarte(name) {
 function oeffne(n) {
   const t = TAGE[n - 1], offen = istOffen(n, JETZT), name = actVon(n, JETZT);
   const figuren = ["einhorn-troete", "dino-tanzt", "einhorn-tanzt", "dino-bass", "einhorn-schlittschuh", "einhorn-rentier"];
+  // Ist der Abend vorbei, spricht das Türchen in der Vergangenheit und bietet keinen Kalendereintrag mehr an
+  const war = L.phase === "nach" || (L.phase === "laeuft" && n < L.n);
   const inhalt = offen
-    ? (name ? `<span class="schwung es">es spielt</span><span class="fett act">${name}</span>` : `<p class="geheim">Wer spielt, steht noch nicht fest.</p>`)
+    ? (name ? `<span class="schwung es">${war ? "es spielte" : "es spielt"}</span><span class="fett act">${name}</span>` : war ? "" : `<p class="geheim">Wer spielt, steht noch nicht fest.</p>`)
     : `<p class="geheim">Wer spielt, verrät dieses Türchen am ${t.n}. Dezember ab ${OEFFNET_UM} Uhr.</p>`;
-  $("#fenster").innerHTML = `<div class="tuerhuelle">${scheibe(n, "riesig")}<div class="tuer">
+  const merken = war ? "" : `<p class="merken"><span class="wozu">In den Kalender eintragen:</span>
+      <a class="strich" href="${googleLink(t)}" target="_blank" rel="noopener">Google Kalender</a>
+      <a class="strich" href="kalender/adventskalender-tuerchen-${n}.ics">Apple, Outlook und andere</a></p>`;
+  $("#fenster").innerHTML = `<div class="tuerhuelle" tabindex="-1">${scheibe(n, "riesig")}<div class="tuer">
     <button class="zu" type="button" data-zu>schließen</button>
     <span class="schwung datum">${wochentag(n, true)}, ${n}. Dezember</span>
     <span class="fett ort ${langerOrt(t)}" id="tuer-ort">${t.ort}</span>
     <p>${t.adresse}</p><p>${uhrzeit(t)}, Eintritt frei, eine gute Stunde</p>
     ${inhalt}${pfeil(t)}
-    <details class="merken"><summary class="strich">In den Kalender eintragen</summary>
-      <a class="strich" href="${googleLink(t)}" target="_blank" rel="noopener">Google Kalender</a>
-      <a class="strich" href="kalender/adventskalender-tuerchen-${n}.ics">Apple, Outlook und andere</a></details>
+    ${merken}
     <img class="figur" src="bilder/${figuren[n % figuren.length]}.webp" alt=""></div></div>`;
   $("#fenster").showModal();
   passeEin($("#tuer-ort"));
-  // Sonst springt der Fokus auf "schließen", und der Browser zeichnet dort manchmal ungefragt einen Rahmen
-  $("#fenster").focus();
+  // Sonst springt der Fokus auf "schließen", und der Browser zeichnet dort manchmal ungefragt einen Rahmen.
+  // Er liegt auf dem scrollbaren Teil, damit Pfeiltasten das Türchen bewegen und nicht die Seite dahinter.
+  $(".tuerhuelle").focus();
 }
 
 
@@ -141,6 +146,8 @@ function stern(r, z = Math.random) {
 zeigeHeute(); zeigeListe(); zeigeKarte(frage.get("karte") || "innenstadt");
 // Der Name wird erst nach dem Laden der Schrift richtig gemessen, und beim Drehen des Handys ändert sich der Platz
 passeOrteEin(); document.fonts.ready.then(passeOrteEin); window.addEventListener("resize", passeOrteEin);
+// iPhones zeigen den Gedrückt-Zustand (:active) nur, wenn es irgendeinen Berührungs-Lauscher gibt
+document.addEventListener("touchstart", () => {}, { passive: true });
 // Die Regeln stehen fest im HTML, hier bekommen sie nur ihren handgezeichneten Stern
 document.querySelectorAll("#regeln li").forEach((li) => li.insertAdjacentHTML("afterbegin", `<svg viewBox="-14 -14 28 28">${stern(11)}</svg>`));
 document.querySelectorAll(".staub").forEach((s, i) => streue(s, 7 + i * 131));
@@ -153,7 +160,8 @@ document.addEventListener("click", (e) => {
   }
   const n = e.target.closest("[data-n]"); if (n) return oeffne(+n.dataset.n);
   const k = e.target.closest("[data-karte]"); if (k) return zeigeKarte(k.dataset.karte);
-  if (e.target.closest("[data-zu]") || e.target === $("#fenster")) $("#fenster").close();
+  // Schließen: der Knopf, ein Tipp neben das Türchen oder in den Streifen darüber (der sieht aus wie Hintergrund)
+  if (e.target.closest("[data-zu]") || e.target.matches("#fenster, .tuerhuelle")) $("#fenster").close();
 });
 if (frage.has("vorschau")) $("#vorschau").hidden = false;
 if (frage.get("offen")) oeffne(+frage.get("offen"));

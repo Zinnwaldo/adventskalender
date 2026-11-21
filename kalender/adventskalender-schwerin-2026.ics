@@ -6,303 +6,326 @@ METHOD:PUBLISH
 X-WR-CALNAME:Singender klingender Adventskalender
 BEGIN:VEVENT
 UID:tuerchen-1-2026@musikklub.com
-DTSTAMP:20261120T000000Z
-SEQUENCE:1
+DTSTAMP:20261121T000000Z
+SEQUENCE:2
 DTSTART:20261201T180000Z
 DTEND:20261201T190000Z
 SUMMARY:Türchen 1: Marianas Musikfenster
 LOCATION:Marianas Musikfenster\, Lindenstraße 9\, Schwerin
 GEO:53.632644;11.418544
-DESCRIPTION:Der singende klingende Adventskalender. Wer spielt\, verrät 
- das Türchen am Tag selbst ab 6 Uhr. Eintritt frei\, draußen\, eine gute
-  Stunde.\nwww.musiKKlub.com
+DESCRIPTION:Der singende klingende Adventskalender. Wer spielt\, steht am
+  Tag selbst ab 6 Uhr auf adventskalender.musikklub.com. Eintritt frei\, d
+ raußen\, eine gute Stunde.
+URL:https://adventskalender.musikklub.com/
 END:VEVENT
 BEGIN:VEVENT
 UID:tuerchen-2-2026@musikklub.com
-DTSTAMP:20261120T000000Z
-SEQUENCE:1
+DTSTAMP:20261121T000000Z
+SEQUENCE:2
 DTSTART:20261202T180000Z
 DTEND:20261202T190000Z
 SUMMARY:Türchen 2: Goethe-Gymnasium
 LOCATION:Goethe-Gymnasium\, Johannes-R.-Becher-Straße 10\, vor der Aula\
  , Schwerin
 GEO:53.637029;11.393113
-DESCRIPTION:Der singende klingende Adventskalender. Wer spielt\, verrät 
- das Türchen am Tag selbst ab 6 Uhr. Eintritt frei\, draußen\, eine gute
-  Stunde.\nwww.musiKKlub.com
+DESCRIPTION:Der singende klingende Adventskalender. Wer spielt\, steht am
+  Tag selbst ab 6 Uhr auf adventskalender.musikklub.com. Eintritt frei\, d
+ raußen\, eine gute Stunde.
+URL:https://adventskalender.musikklub.com/
 END:VEVENT
 BEGIN:VEVENT
 UID:tuerchen-3-2026@musikklub.com
-DTSTAMP:20261120T000000Z
-SEQUENCE:1
+DTSTAMP:20261121T000000Z
+SEQUENCE:2
 DTSTART:20261203T180000Z
 DTEND:20261203T190000Z
 SUMMARY:Türchen 3: Ärztehaus
 LOCATION:Ärztehaus\, Rahlstedter Straße 29\, Schwerin
 GEO:53.647925;11.36507
-DESCRIPTION:Der singende klingende Adventskalender. Wer spielt\, verrät 
- das Türchen am Tag selbst ab 6 Uhr. Eintritt frei\, draußen\, eine gute
-  Stunde.\nwww.musiKKlub.com
+DESCRIPTION:Der singende klingende Adventskalender. Wer spielt\, steht am
+  Tag selbst ab 6 Uhr auf adventskalender.musikklub.com. Eintritt frei\, d
+ raußen\, eine gute Stunde.
+URL:https://adventskalender.musikklub.com/
 END:VEVENT
 BEGIN:VEVENT
 UID:tuerchen-4-2026@musikklub.com
-DTSTAMP:20261120T000000Z
-SEQUENCE:1
+DTSTAMP:20261121T000000Z
+SEQUENCE:2
 DTSTART:20261204T180000Z
 DTEND:20261204T190000Z
 SUMMARY:Türchen 4: Karl-Liebknecht-Platz
 LOCATION:Karl-Liebknecht-Platz\, Karl-Liebknecht-Platz 6\, Schwerin
 GEO:53.622907;11.404584
-DESCRIPTION:Der singende klingende Adventskalender. Wer spielt\, verrät 
- das Türchen am Tag selbst ab 6 Uhr. Eintritt frei\, draußen\, eine gute
-  Stunde.\nwww.musiKKlub.com
+DESCRIPTION:Der singende klingende Adventskalender. Wer spielt\, steht am
+  Tag selbst ab 6 Uhr auf adventskalender.musikklub.com. Eintritt frei\, d
+ raußen\, eine gute Stunde.
+URL:https://adventskalender.musikklub.com/
 END:VEVENT
 BEGIN:VEVENT
 UID:tuerchen-5-2026@musikklub.com
-DTSTAMP:20261120T000000Z
-SEQUENCE:1
+DTSTAMP:20261121T000000Z
+SEQUENCE:2
 DTSTART:20261205T180000Z
 DTEND:20261205T190000Z
 SUMMARY:Türchen 5: Mueßer Holz
 LOCATION:Mueßer Holz\, Kepler Passage\, Schwerin
 GEO:53.591134;11.467235
-DESCRIPTION:Der singende klingende Adventskalender. Wer spielt\, verrät 
- das Türchen am Tag selbst ab 6 Uhr. Eintritt frei\, draußen\, eine gute
-  Stunde.\nwww.musiKKlub.com
+DESCRIPTION:Der singende klingende Adventskalender. Wer spielt\, steht am
+  Tag selbst ab 6 Uhr auf adventskalender.musikklub.com. Eintritt frei\, d
+ raußen\, eine gute Stunde.
+URL:https://adventskalender.musikklub.com/
 END:VEVENT
 BEGIN:VEVENT
 UID:tuerchen-6-2026@musikklub.com
-DTSTAMP:20261120T000000Z
-SEQUENCE:1
+DTSTAMP:20261121T000000Z
+SEQUENCE:2
 DTSTART:20261206T180000Z
 DTEND:20261206T190000Z
 SUMMARY:Türchen 6: St. Anna
 LOCATION:St. Anna\, Klosterstraße 26\, Schwerin
 GEO:53.627205;11.413004
-DESCRIPTION:Der singende klingende Adventskalender. Wer spielt\, verrät 
- das Türchen am Tag selbst ab 6 Uhr. Eintritt frei\, draußen\, eine gute
-  Stunde.\nwww.musiKKlub.com
+DESCRIPTION:Der singende klingende Adventskalender. Wer spielt\, steht am
+  Tag selbst ab 6 Uhr auf adventskalender.musikklub.com. Eintritt frei\, d
+ raußen\, eine gute Stunde.
+URL:https://adventskalender.musikklub.com/
 END:VEVENT
 BEGIN:VEVENT
 UID:tuerchen-7-2026@musikklub.com
-DTSTAMP:20261120T000000Z
-SEQUENCE:1
+DTSTAMP:20261121T000000Z
+SEQUENCE:2
 DTSTART:20261207T180000Z
 DTEND:20261207T190000Z
 SUMMARY:Türchen 7: Stephanus-Hof
 LOCATION:Stephanus-Hof\, Körnerstraße 7\, Schwerin
 GEO:53.631752;11.4158
-DESCRIPTION:Der singende klingende Adventskalender. Wer spielt\, verrät 
- das Türchen am Tag selbst ab 6 Uhr. Eintritt frei\, draußen\, eine gute
-  Stunde.\nwww.musiKKlub.com
+DESCRIPTION:Der singende klingende Adventskalender. Wer spielt\, steht am
+  Tag selbst ab 6 Uhr auf adventskalender.musikklub.com. Eintritt frei\, d
+ raußen\, eine gute Stunde.
+URL:https://adventskalender.musikklub.com/
 END:VEVENT
 BEGIN:VEVENT
 UID:tuerchen-8-2026@musikklub.com
-DTSTAMP:20261120T000000Z
-SEQUENCE:1
+DTSTAMP:20261121T000000Z
+SEQUENCE:2
 DTSTART:20261208T180000Z
 DTEND:20261208T190000Z
 SUMMARY:Türchen 8: Kreativkaufhaus
 LOCATION:Kreativkaufhaus\, Klöresgang 5\, Schwerin
 GEO:53.629212;11.409166
-DESCRIPTION:Der singende klingende Adventskalender. Wer spielt\, verrät 
- das Türchen am Tag selbst ab 6 Uhr. Eintritt frei\, draußen\, eine gute
-  Stunde.\nwww.musiKKlub.com
+DESCRIPTION:Der singende klingende Adventskalender. Wer spielt\, steht am
+  Tag selbst ab 6 Uhr auf adventskalender.musikklub.com. Eintritt frei\, d
+ raußen\, eine gute Stunde.
+URL:https://adventskalender.musikklub.com/
 END:VEVENT
 BEGIN:VEVENT
 UID:tuerchen-9-2026@musikklub.com
-DTSTAMP:20261120T000000Z
-SEQUENCE:1
+DTSTAMP:20261121T000000Z
+SEQUENCE:2
 DTSTART:20261209T180000Z
 DTEND:20261209T190000Z
 SUMMARY:Türchen 9: Demmlerplatz
 LOCATION:Demmlerplatz\, Demmlerplatz 1\, Schwerin
 GEO:53.631281;11.399823
-DESCRIPTION:Der singende klingende Adventskalender. Wer spielt\, verrät 
- das Türchen am Tag selbst ab 6 Uhr. Eintritt frei\, draußen\, eine gute
-  Stunde.\nwww.musiKKlub.com
+DESCRIPTION:Der singende klingende Adventskalender. Wer spielt\, steht am
+  Tag selbst ab 6 Uhr auf adventskalender.musikklub.com. Eintritt frei\, d
+ raußen\, eine gute Stunde.
+URL:https://adventskalender.musikklub.com/
 END:VEVENT
 BEGIN:VEVENT
 UID:tuerchen-10-2026@musikklub.com
-DTSTAMP:20261120T000000Z
-SEQUENCE:1
+DTSTAMP:20261121T000000Z
+SEQUENCE:2
 DTSTART:20261210T180000Z
 DTEND:20261210T190000Z
 SUMMARY:Türchen 10: PAUL Holzwerkstatt
 LOCATION:PAUL Holzwerkstatt\, Hof der Werderstraße 19a\, Schwerin
 GEO:53.636233;11.421565
-DESCRIPTION:Der singende klingende Adventskalender. Wer spielt\, verrät 
- das Türchen am Tag selbst ab 6 Uhr. Eintritt frei\, draußen\, eine gute
-  Stunde.\nwww.musiKKlub.com
+DESCRIPTION:Der singende klingende Adventskalender. Wer spielt\, steht am
+  Tag selbst ab 6 Uhr auf adventskalender.musikklub.com. Eintritt frei\, d
+ raußen\, eine gute Stunde.
+URL:https://adventskalender.musikklub.com/
 END:VEVENT
 BEGIN:VEVENT
 UID:tuerchen-11-2026@musikklub.com
-DTSTAMP:20261120T000000Z
-SEQUENCE:1
+DTSTAMP:20261121T000000Z
+SEQUENCE:2
 DTSTART:20261211T180000Z
 DTEND:20261211T190000Z
 SUMMARY:Türchen 11: Nachbarschaftstreff Weststadt
 LOCATION:Nachbarschaftstreff Weststadt\, Lessingstraße 26a\, Schwerin
 GEO:53.634552;11.392194
-DESCRIPTION:Der singende klingende Adventskalender. Wer spielt\, verrät 
- das Türchen am Tag selbst ab 6 Uhr. Eintritt frei\, draußen\, eine gute
-  Stunde.\nwww.musiKKlub.com
+DESCRIPTION:Der singende klingende Adventskalender. Wer spielt\, steht am
+  Tag selbst ab 6 Uhr auf adventskalender.musikklub.com. Eintritt frei\, d
+ raußen\, eine gute Stunde.
+URL:https://adventskalender.musikklub.com/
 END:VEVENT
 BEGIN:VEVENT
 UID:tuerchen-12-2026@musikklub.com
-DTSTAMP:20261120T000000Z
-SEQUENCE:1
+DTSTAMP:20261121T000000Z
+SEQUENCE:2
 DTSTART:20261212T180000Z
 DTEND:20261212T190000Z
 SUMMARY:Türchen 12: Hof Familie Scharf
 LOCATION:Hof Familie Scharf\, Hof in der Bornhövedstraße 58\, Schwerin
 GEO:53.634369;11.427547
-DESCRIPTION:Der singende klingende Adventskalender. Wer spielt\, verrät 
- das Türchen am Tag selbst ab 6 Uhr. Eintritt frei\, draußen\, eine gute
-  Stunde.\nwww.musiKKlub.com
+DESCRIPTION:Der singende klingende Adventskalender. Wer spielt\, steht am
+  Tag selbst ab 6 Uhr auf adventskalender.musikklub.com. Eintritt frei\, d
+ raußen\, eine gute Stunde.
+URL:https://adventskalender.musikklub.com/
 END:VEVENT
 BEGIN:VEVENT
 UID:tuerchen-13-2026@musikklub.com
-DTSTAMP:20261120T000000Z
-SEQUENCE:1
+DTSTAMP:20261121T000000Z
+SEQUENCE:2
 DTSTART:20261213T160000Z
 DTEND:20261213T170000Z
 SUMMARY:Türchen 13: Schwerin singt
 LOCATION:Schwerin singt\, Alter Garten 1\, Schwerin
 GEO:53.6266;11.416541
-DESCRIPTION:Der singende klingende Adventskalender. Wer spielt\, verrät 
- das Türchen am Tag selbst ab 6 Uhr. Eintritt frei\, draußen\, eine gute
-  Stunde.\nwww.musiKKlub.com
+DESCRIPTION:Der singende klingende Adventskalender. Wer spielt\, steht am
+  Tag selbst ab 6 Uhr auf adventskalender.musikklub.com. Eintritt frei\, d
+ raußen\, eine gute Stunde.
+URL:https://adventskalender.musikklub.com/
 END:VEVENT
 BEGIN:VEVENT
 UID:tuerchen-14-2026@musikklub.com
-DTSTAMP:20261120T000000Z
-SEQUENCE:1
+DTSTAMP:20261121T000000Z
+SEQUENCE:2
 DTSTART:20261214T180000Z
 DTEND:20261214T190000Z
 SUMMARY:Türchen 14: Alte Post
 LOCATION:Alte Post\, vor der Alten Post am Berliner Platz 4\, Schwerin
 GEO:53.598463;11.448603
-DESCRIPTION:Der singende klingende Adventskalender. Wer spielt\, verrät 
- das Türchen am Tag selbst ab 6 Uhr. Eintritt frei\, draußen\, eine gute
-  Stunde.\nwww.musiKKlub.com
+DESCRIPTION:Der singende klingende Adventskalender. Wer spielt\, steht am
+  Tag selbst ab 6 Uhr auf adventskalender.musikklub.com. Eintritt frei\, d
+ raußen\, eine gute Stunde.
+URL:https://adventskalender.musikklub.com/
 END:VEVENT
 BEGIN:VEVENT
 UID:tuerchen-15-2026@musikklub.com
-DTSTAMP:20261120T000000Z
-SEQUENCE:1
+DTSTAMP:20261121T000000Z
+SEQUENCE:2
 DTSTART:20261215T180000Z
 DTEND:20261215T190000Z
 SUMMARY:Türchen 15: Paulskirche
 LOCATION:Paulskirche\, Am Packhof 8\, Schwerin
 GEO:53.632027;11.40845
-DESCRIPTION:Der singende klingende Adventskalender. Wer spielt\, verrät 
- das Türchen am Tag selbst ab 6 Uhr. Eintritt frei\, draußen\, eine gute
-  Stunde.\nwww.musiKKlub.com
+DESCRIPTION:Der singende klingende Adventskalender. Wer spielt\, steht am
+  Tag selbst ab 6 Uhr auf adventskalender.musikklub.com. Eintritt frei\, d
+ raußen\, eine gute Stunde.
+URL:https://adventskalender.musikklub.com/
 END:VEVENT
 BEGIN:VEVENT
 UID:tuerchen-16-2026@musikklub.com
-DTSTAMP:20261120T000000Z
-SEQUENCE:1
+DTSTAMP:20261121T000000Z
+SEQUENCE:2
 DTSTART:20261216T180000Z
 DTEND:20261216T190000Z
 SUMMARY:Türchen 16: Skatepark Lankow
 LOCATION:Skatepark Lankow\, Ratzeburger Straße 44\, Schwerin
 GEO:53.651721;11.360642
-DESCRIPTION:Der singende klingende Adventskalender. Wer spielt\, verrät 
- das Türchen am Tag selbst ab 6 Uhr. Eintritt frei\, draußen\, eine gute
-  Stunde.\nwww.musiKKlub.com
+DESCRIPTION:Der singende klingende Adventskalender. Wer spielt\, steht am
+  Tag selbst ab 6 Uhr auf adventskalender.musikklub.com. Eintritt frei\, d
+ raußen\, eine gute Stunde.
+URL:https://adventskalender.musikklub.com/
 END:VEVENT
 BEGIN:VEVENT
 UID:tuerchen-17-2026@musikklub.com
-DTSTAMP:20261120T000000Z
-SEQUENCE:1
+DTSTAMP:20261121T000000Z
+SEQUENCE:2
 DTSTART:20261217T180000Z
 DTEND:20261217T190000Z
 SUMMARY:Türchen 17: Flotte Weihnachten
 LOCATION:Flotte Weihnachten\, Werderstraße 140\, Schwerin
 GEO:53.626226;11.419558
-DESCRIPTION:Der singende klingende Adventskalender. Wer spielt\, verrät 
- das Türchen am Tag selbst ab 6 Uhr. Eintritt frei\, draußen\, eine gute
-  Stunde.\nwww.musiKKlub.com
+DESCRIPTION:Der singende klingende Adventskalender. Wer spielt\, steht am
+  Tag selbst ab 6 Uhr auf adventskalender.musikklub.com. Eintritt frei\, d
+ raußen\, eine gute Stunde.
+URL:https://adventskalender.musikklub.com/
 END:VEVENT
 BEGIN:VEVENT
 UID:tuerchen-18-2026@musikklub.com
-DTSTAMP:20261120T000000Z
-SEQUENCE:1
+DTSTAMP:20261121T000000Z
+SEQUENCE:2
 DTSTART:20261218T180000Z
 DTEND:20261218T190000Z
 SUMMARY:Türchen 18: Taschengarten Münzstraße
 LOCATION:Taschengarten Münzstraße\, Münzstraße / Fischerstraße\, Sch
  werin
 GEO:53.630729;11.418075
-DESCRIPTION:Der singende klingende Adventskalender. Wer spielt\, verrät 
- das Türchen am Tag selbst ab 6 Uhr. Eintritt frei\, draußen\, eine gute
-  Stunde.\nwww.musiKKlub.com
+DESCRIPTION:Der singende klingende Adventskalender. Wer spielt\, steht am
+  Tag selbst ab 6 Uhr auf adventskalender.musikklub.com. Eintritt frei\, d
+ raußen\, eine gute Stunde.
+URL:https://adventskalender.musikklub.com/
 END:VEVENT
 BEGIN:VEVENT
 UID:tuerchen-19-2026@musikklub.com
-DTSTAMP:20261120T000000Z
-SEQUENCE:1
+DTSTAMP:20261121T000000Z
+SEQUENCE:2
 DTSTART:20261219T180000Z
 DTEND:20261219T190000Z
 SUMMARY:Türchen 19: Freilichtmuseum
 LOCATION:Freilichtmuseum\, Alte Crivitzer Landstraße 13\, Schwerin
 GEO:53.600172;11.478685
-DESCRIPTION:Der singende klingende Adventskalender. Wer spielt\, verrät 
- das Türchen am Tag selbst ab 6 Uhr. Eintritt frei\, draußen\, eine gute
-  Stunde.\nwww.musiKKlub.com
+DESCRIPTION:Der singende klingende Adventskalender. Wer spielt\, steht am
+  Tag selbst ab 6 Uhr auf adventskalender.musikklub.com. Eintritt frei\, d
+ raußen\, eine gute Stunde.
+URL:https://adventskalender.musikklub.com/
 END:VEVENT
 BEGIN:VEVENT
 UID:tuerchen-20-2026@musikklub.com
-DTSTAMP:20261120T000000Z
-SEQUENCE:1
+DTSTAMP:20261121T000000Z
+SEQUENCE:2
 DTSTART:20261220T180000Z
 DTEND:20261220T190000Z
 SUMMARY:Türchen 20: Hotel Speicher
 LOCATION:Hotel Speicher\, Uferpromenade\, Schwerin
 GEO:53.641334;11.419895
-DESCRIPTION:Der singende klingende Adventskalender. Wer spielt\, verrät 
- das Türchen am Tag selbst ab 6 Uhr. Eintritt frei\, draußen\, eine gute
-  Stunde.\nwww.musiKKlub.com
+DESCRIPTION:Der singende klingende Adventskalender. Wer spielt\, steht am
+  Tag selbst ab 6 Uhr auf adventskalender.musikklub.com. Eintritt frei\, d
+ raußen\, eine gute Stunde.
+URL:https://adventskalender.musikklub.com/
 END:VEVENT
 BEGIN:VEVENT
 UID:tuerchen-21-2026@musikklub.com
-DTSTAMP:20261120T000000Z
-SEQUENCE:1
+DTSTAMP:20261121T000000Z
+SEQUENCE:2
 DTSTART:20261221T180000Z
 DTEND:20261221T190000Z
 SUMMARY:Türchen 21: Domportal
 LOCATION:Domportal\, Am Dom\, Schwerin
 GEO:53.629723;11.414431
-DESCRIPTION:Der singende klingende Adventskalender. Wer spielt\, verrät 
- das Türchen am Tag selbst ab 6 Uhr. Eintritt frei\, draußen\, eine gute
-  Stunde.\nwww.musiKKlub.com
+DESCRIPTION:Der singende klingende Adventskalender. Wer spielt\, steht am
+  Tag selbst ab 6 Uhr auf adventskalender.musikklub.com. Eintritt frei\, d
+ raußen\, eine gute Stunde.
+URL:https://adventskalender.musikklub.com/
 END:VEVENT
 BEGIN:VEVENT
 UID:tuerchen-22-2026@musikklub.com
-DTSTAMP:20261120T000000Z
-SEQUENCE:1
+DTSTAMP:20261121T000000Z
+SEQUENCE:2
 DTSTART:20261222T180000Z
 DTEND:20261222T190000Z
 SUMMARY:Türchen 22: Café Löwenherz
 LOCATION:Café Löwenherz\, Obotritenring 245\, Schwerin
 GEO:53.624598;11.400154
-DESCRIPTION:Der singende klingende Adventskalender. Wer spielt\, verrät 
- das Türchen am Tag selbst ab 6 Uhr. Eintritt frei\, draußen\, eine gute
-  Stunde.\nwww.musiKKlub.com
+DESCRIPTION:Der singende klingende Adventskalender. Wer spielt\, steht am
+  Tag selbst ab 6 Uhr auf adventskalender.musikklub.com. Eintritt frei\, d
+ raußen\, eine gute Stunde.
+URL:https://adventskalender.musikklub.com/
 END:VEVENT
 BEGIN:VEVENT
 UID:tuerchen-23-2026@musikklub.com
-DTSTAMP:20261120T000000Z
-SEQUENCE:1
+DTSTAMP:20261121T000000Z
+SEQUENCE:2
 DTSTART:20261223T180000Z
 DTEND:20261223T190000Z
 SUMMARY:Türchen 23: Ziegenmarkt
 LOCATION:Ziegenmarkt\, Ziegenmarkt 11\, Schwerin
 GEO:53.632128;11.41994
-DESCRIPTION:Der singende klingende Adventskalender. Wer spielt\, verrät 
- das Türchen am Tag selbst ab 6 Uhr. Eintritt frei\, draußen\, eine gute
-  Stunde.\nwww.musiKKlub.com
+DESCRIPTION:Der singende klingende Adventskalender. Wer spielt\, steht am
+  Tag selbst ab 6 Uhr auf adventskalender.musikklub.com. Eintritt frei\, d
+ raußen\, eine gute Stunde.
+URL:https://adventskalender.musikklub.com/
 END:VEVENT
 END:VCALENDAR

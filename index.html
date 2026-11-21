@@ -57,6 +57,11 @@ button { font: inherit; color: inherit; cursor: pointer; }
 .blatt.rueck { background: linear-gradient(#5a4287, #4a5a96 40%, #267680 82%, var(--petrol-tief)); }
 .blatt .grund { position: absolute; inset: 0; z-index: -2; background-size: cover; background-position: 50% 30%; }
 .staub { position: absolute; inset: 0; width: 100%; height: 100%; z-index: -1; pointer-events: none; }
+/* Auf den Textblättern liegt der Goldstaub hinter Fließtext, deshalb dort blasser */
+.rueck .staub circle, .fuss .staub circle { opacity: .3; }
+/* Rückmeldung beim Antippen */
+.liste button:active, .nadel:active, .pfeilhuelle:active, .heute button.kopf:active { filter: brightness(1.2); }
+.strich:active, .zu:active, .wahl button:active { opacity: .6; }
 .innen { max-width: 1080px; margin: 0 auto; position: relative; z-index: 1; }
 
 .schwung { font-family: var(--schwung); font-weight: 400; color: var(--creme); line-height: 1; }
@@ -84,7 +89,9 @@ button { font: inherit; color: inherit; cursor: pointer; }
 
 .heute { margin-top: 30px; position: relative; z-index: 2; min-height: 282px; padding-bottom: 34px; }
 .heute .kopf { display: flex; align-items: center; gap: 14px; }
-.heute .kopf > div { min-width: 0; }
+.heute .kopf > div, .heute .kopf > .daneben { min-width: 0; }
+.heute button.kopf { all: unset; display: flex; align-items: center; gap: 14px; cursor: pointer; width: 100%; box-sizing: border-box; }
+.heute .daneben { display: block; }
 .heute .riesig { width: 96px; height: 96px; font-size: 62px; transform: rotate(-6deg); box-shadow: inset 0 0 0 3px var(--wein-hell), 0 0 0 3px #2a1026, 0 0 26px rgba(246,196,83,.55), 0 6px 14px rgba(0,0,0,.5); }
 .heute .wann { font-size: 34px; display: block; }
 .heute .ort { font-size: 38px; display: block; margin-top: 2px; }
@@ -124,7 +131,7 @@ button { font: inherit; color: inherit; cursor: pointer; }
 .karte img { width: 100%; -webkit-mask-image: linear-gradient(transparent, #000 8%, #000 92%, transparent); mask-image: linear-gradient(transparent, #000 8%, #000 92%, transparent); }
 /* Die Scheibe bleibt klein wie auf dem Poster, die Tippfläche darum ist 44 px groß */
 .nadel { position: absolute; transform: translate(-50%, -50%); border: 0; padding: 0; background: none; display: grid; place-items: center; min-width: 44px; min-height: 44px; }
-.nadel.heute .scheibe { width: 46px; height: 46px; font-size: 28px; background: var(--gold); color: var(--tinte); box-shadow: 0 0 0 2px #2a1026, 0 0 0 9px rgba(246,196,83,.25), 0 0 30px 8px rgba(246,196,83,.6); }
+.nadel.jetzt .scheibe { width: 46px; height: 46px; font-size: 28px; background: var(--gold); color: var(--tinte); box-shadow: 0 0 0 2px #2a1026, 0 0 0 9px rgba(246,196,83,.25), 0 0 30px 8px rgba(246,196,83,.6); }
 .nadel.rand .scheibe { border-radius: 0; width: 46px; height: 36px; box-shadow: none; clip-path: polygon(0 16%, 62% 16%, 62% 0, 100% 50%, 62% 100%, 62% 84%, 0 84%); padding-right: 10px; }
 .nadel.rand { filter: drop-shadow(0 3px 5px rgba(0,0,0,.55)); }
 .quelle { font-size: 13px; opacity: .7; padding: 0 26px; margin: 4px 0 0; }
@@ -143,11 +150,9 @@ button { font: inherit; color: inherit; cursor: pointer; }
 
 .strich { all: unset; cursor: pointer; display: inline-block; box-sizing: border-box; min-height: 44px; padding: 9px 0; color: var(--gold); font-size: 20px; text-decoration: underline dashed 2px; text-underline-offset: 6px; }
 .tuer .merken { margin-top: 9px; max-width: 62%; }
-/* Auswahl des Kalenders: klappt unter dem Link auf, ein Pfeil zeigt den Zustand */
-.merken summary::after { content: " \25BE"; }
-.merken[open] summary::after { content: " \25B4"; }
-.merken summary:focus-visible, .merken a:focus-visible { outline: 2px dashed var(--gold); outline-offset: 3px; }
-details.merken a { display: block; min-height: 44px; padding: 9px 0 9px 14px; font-size: 18px; }
+/* Auswahl des Kalenders: beide Wege stehen immer da. Ein Aufklappen ließ die Links unter dem Finger wegspringen. */
+.tuer .merken .wozu { display: block; font-size: 18px; opacity: .85; }
+.tuer .merken a { display: block; min-height: 44px; padding: 9px 0; font-size: 19px; }
 .vorwort + .merken { margin: -15px 0 13px; }
 
 /* ---------- Geöffnetes Türchen ---------- */
@@ -155,10 +160,13 @@ dialog { border: 0; padding: 0; margin: auto auto 0; width: 100%; max-width: 460
 dialog::backdrop { background: rgba(14,10,26,.72); }
 /* Der Fokus liegt nach dem Öffnen auf dem Fenster selbst. Das braucht keinen Rahmen, die Knöpfe darin behalten ihren. */
 dialog:focus, dialog:focus-visible { outline: none; }
+.tuerhuelle:focus, .tuerhuelle:focus-visible { outline: none; }
+/* Solange ein Türchen offen ist, bleibt die Seite dahinter stehen */
+html:has(dialog[open]) { overflow: hidden; }
 .tuer { position: relative; padding: 62px 28px 30px; background: linear-gradient(#5a4287, #45609a 55%, var(--petrol-tief)); box-shadow: 0 -10px 40px rgba(0,0,0,.5); overflow: hidden; }
 .tuer::after { content: ""; position: absolute; inset: 9px; border: 2px dashed var(--creme); opacity: .9; pointer-events: none; }
 .tuerhuelle > .riesig { position: absolute; left: 26px; top: -8px; width: 104px; height: 104px; font-size: 66px; transform: rotate(-7deg); z-index: 3; box-shadow: inset 0 0 0 3px var(--wein-hell), 0 0 0 3px #2a1026, 0 0 26px rgba(246,196,83,.5), 0 6px 14px rgba(0,0,0,.5); }
-/* Passt das Türchen nicht auf den Bildschirm (kleines Handy, Querformat, aufgeklappte Kalenderauswahl), lässt es sich in sich scrollen */
+/* Passt das Türchen nicht auf den Bildschirm (kleines Handy, Querformat), lässt es sich in sich scrollen */
 .tuerhuelle { position: relative; padding-top: 44px; box-sizing: border-box; max-height: 92vh; max-height: 92dvh; overflow-y: auto; overscroll-behavior: contain; }
 .tuer .zu { all: unset; cursor: pointer; position: absolute; right: 22px; top: 11px; box-sizing: border-box; min-height: 44px; padding: 9px 0; font-size: 20px; z-index: 6; text-decoration: underline dashed 2px; text-underline-offset: 6px; }
 .tuer .datum { font-size: 27px; display: block; margin-top: 14px; }
@@ -208,7 +216,7 @@ button:focus-visible, a:focus-visible { outline: 3px solid var(--gold) !importan
   .blatt::after { inset: 16px; }
   .poster .innen { display: grid; grid-template-columns: 1.15fr 1fr; gap: 0 60px; align-items: start; }
   .poster .logo { max-width: 640px; }
-  .poster .einhorn { width: 220px; right: auto; left: 300px; top: 150px; }
+  .poster .einhorn { width: 220px; right: auto; left: 190px; top: 170px; } /* hängt unter dem Schriftzug, ohne Buchstaben zu verdecken */
   .immer { grid-column: 2; grid-row: 1; margin-top: 30px; }
   .immer .schwung { font-size: 38px; } .immer .fett { font-size: 44px; } .immer .gross { font-size: 80px; }
   .heute { grid-column: 1 / -1; margin: 120px 0 0; padding: 0 0 60px 0; min-height: 330px; }
@@ -224,7 +232,7 @@ button:focus-visible, a:focus-visible { outline: 3px solid var(--gold) !importan
   dialog { margin: auto; }
 }
 @media (prefers-reduced-motion: no-preference) {
-  .nadel.heute .scheibe { animation: glimmen 2.6s ease-in-out infinite alternate; }
+  .nadel.jetzt .scheibe { animation: glimmen 2.6s ease-in-out infinite alternate; }
   @keyframes glimmen { to { box-shadow: 0 0 0 2px #2a1026, 0 0 0 14px rgba(246,196,83,.12), 0 0 40px 12px rgba(246,196,83,.75); } }
 }
 </style>
@@ -354,7 +362,7 @@ button:focus-visible, a:focus-visible { outline: 3px solid var(--gold) !importan
 </section>
 
 <section class="blatt rueck hell abend" id="abend">
-  <svg class="staub" data-sterne="80:48 92:112 9:590 90:640" data-punkte="44" data-noten="72:90"></svg>
+  <svg class="staub" data-sterne="80:48 92:112" data-punkte="44" data-noten="72:90"></svg>
   <div class="innen">
     <h2 class="titel"><span class="schwung">so läuft</span><span class="fett">ein Abend</span></h2>
     <ul id="regeln">
@@ -370,7 +378,7 @@ button:focus-visible, a:focus-visible { outline: 3px solid var(--gold) !importan
 
 <footer class="blatt fuss">
   <div class="grund" style="background-image:url(bilder/nacht-quer.jpg)"></div>
-  <svg class="staub" data-sterne="12:44 88:58 82:210" data-punkte="40" data-noten="16:150"></svg>
+  <svg class="staub" data-sterne="12:44 88:58" data-punkte="40" data-noten="16:150"></svg>
   <img class="mk" src="bilder/musikklub.webp" width="380" height="222" loading="lazy" decoding="async" alt="musiKKlub">
   <p>Freundlich unterstützt von: Zirkus Schwerin e.V., Landeshauptstadt Schwerin, Musik- und Kunstschule Ataraxia, Schweriner Bürgerstiftung, Sparkasse Schwerin, Hauspost und Nahverkehr Schwerin</p>
   <p class="netz"><a href="https://www.musikklub.com/">www.musiKKlub.com</a></p>

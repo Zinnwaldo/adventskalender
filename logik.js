@@ -3,11 +3,14 @@ import { JAHR, LETZTER, ACTS, TAGE } from "./daten.js";
 
 // Wann ein Abend beginnt (volle Stunde in Schwerin) und wie die Seite das nennt. Jeder Abend dauert eine Stunde.
 export const beginn = (t) => t?.uhr ?? 19;
-export const uhrzeit = (t) => (t?.uhr ? `schon um ${t.uhr} Uhr` : "19 Uhr");
+export const uhrzeit = (t) => (beginn(t) === 19 ? "19 Uhr" : `${beginn(t) < 19 ? "schon" : "erst"} um ${beginn(t)} Uhr`);
+const zwei = (z) => String(z).padStart(2, "0");
 
 // Ab wann ist ein Türchen offen, also wann verraten Seite und Kalender, wer spielt?
 // Karstens Regel (18.11.2026): am jeweiligen Tag morgens um 6 Uhr, und zwar nach Schweriner Uhr.
 export const OEFFNET_UM = 6;
+// Unter dieser Adresse steht die Seite. Kalendereinträge verweisen dorthin.
+export const SEITE = "adventskalender.musikklub.com";
 
 const uhr = new Intl.DateTimeFormat("en-CA", { timeZone: "Europe/Berlin", hourCycle: "h23", year: "numeric", month: "numeric", day: "numeric", hour: "numeric", minute: "numeric" });
 // Datum und Uhrzeit in Schwerin, egal wie das Gerät eingestellt ist
@@ -25,7 +28,7 @@ export function istOffen(n, jetzt) {
 export function lage(jetzt) {
   const b = berlin(jetzt), m = marke_von(jetzt);
   if (m < marke(JAHR, 12, 1)) return { phase: "vor", tage: Math.round((Date.UTC(JAHR, 11, 1) - Date.UTC(b.jahr, b.monat - 1, b.tag)) / 864e5) };
-  if (m >= marke(JAHR, 12, LETZTER, 20)) return { phase: "nach" };
+  if (m >= marke(JAHR, 12, LETZTER, beginn(TAGE[LETZTER - 1]) + 1)) return { phase: "nach" }; // eine Stunde nach Beginn des letzten Abends
   const vorbei = b.stunde >= beginn(TAGE[b.tag - 1]) + 1; // eine Stunde nach Beginn zeigt die Seite den nächsten Abend
   return { phase: "laeuft", n: b.tag + (vorbei ? 1 : 0), morgen: vorbei, heuteNr: b.tag };
 }
@@ -75,7 +78,6 @@ export function vorschauZeit(text) {
 // die fertigen Dateien liegen in kalender/. Auf der Seite selbst läuft diese Funktion nicht mehr.
 // Der Act steht nur drin, wenn das Türchen schon offen ist, sonst würde die Datei die Überraschung verraten.
 export function kalenderdatei(tage, jetzt) {
-  const zwei = (z) => String(z).padStart(2, "0");
   const sauber = (text) => text.replace(/\\/g, "\\\\").replace(/([,;])/g, "\\$1").replace(/\n/g, "\\n");
   // Zeilen dürfen höchstens 75 Bytes lang sein, längere werden mit Zeilenumbruch plus Leerzeichen fortgesetzt.
   // Gezählt wird in Bytes, nicht in Buchstaben: ein Umlaut braucht zwei.
@@ -92,19 +94,20 @@ export function kalenderdatei(tage, jetzt) {
   const zeilen = ["BEGIN:VCALENDAR", "VERSION:2.0", "PRODID:-//musiKKlub//Singender klingender Adventskalender//DE", "CALSCALE:GREGORIAN", "METHOD:PUBLISH", "X-WR-CALNAME:Singender klingender Adventskalender"];
   for (const t of tage) {
     const name = actVon(t.n, jetzt);
-    const act = name ? `Es spielt ${name}.` : `Wer spielt, verrät das Türchen am Tag selbst ab ${OEFFNET_UM} Uhr.`;
+    const act = name ? `Es spielt ${name}.` : `Wer spielt, steht am Tag selbst ab ${OEFFNET_UM} Uhr auf ${SEITE}.`;
     zeilen.push("BEGIN:VEVENT",
       `UID:tuerchen-${t.n}-${JAHR}@musikklub.com`,
       `DTSTAMP:${stempel}`,
-      // Fassung 1: seit dem 20.11.2026 dauert ein Abend im Kalender eine Stunde statt 30 Minuten
-      "SEQUENCE:1",
+      // Fassung 2 (21.11.2026): Beschreibung führt zur Seite. Bei jeder Änderung an Ort, Zeit oder Text um 1 erhöhen.
+      "SEQUENCE:2",
       // Schwerin ist im Dezember der Weltzeit (UTC) eine Stunde voraus: 19:00 Uhr dort ist 18:00 Uhr UTC, deshalb das Z am Ende
       `DTSTART:${JAHR}12${zwei(t.n)}T${zwei(beginn(t) - 1)}0000Z`,
       `DTEND:${JAHR}12${zwei(t.n)}T${zwei(beginn(t))}0000Z`,
       `SUMMARY:${sauber(`Türchen ${t.n}: ${t.ort}`)}`,
       `LOCATION:${sauber(`${t.ort}, ${t.adresse}, Schwerin`)}`,
       `GEO:${t.lat};${t.lon}`,
-      `DESCRIPTION:${sauber(`Der singende klingende Adventskalender. ${act} Eintritt frei, draußen, eine gute Stunde.\nwww.musiKKlub.com`)}`,
+      `DESCRIPTION:${sauber(`Der singende klingende Adventskalender. ${act} Eintritt frei, draußen, eine gute Stunde.${name ? "\n" + SEITE : ""}`)}`,
+      `URL:https://${SEITE}/`,
       "END:VEVENT");
   }
   zeilen.push("END:VCALENDAR");
@@ -114,14 +117,14 @@ export function kalenderdatei(tage, jetzt) {
 
 // Derselbe Abend als Link für den Google Kalender. Ohne Act, weil der Link schon vor dem Öffnen des Türchens sichtbar ist.
 export function googleLink(t) {
-  const tag = `${JAHR}12${String(t.n).padStart(2, "0")}`;
+  const tag = `${JAHR}12${zwei(t.n)}`;
   // Leerzeichen als %20 wie im Link, der auf Pixel und iPhone ausprobiert wurde
   const teile = {
     action: "TEMPLATE",
     text: `Türchen ${t.n}: ${t.ort}`,
-    dates: `${tag}T${beginn(t) - 1}0000Z/${tag}T${beginn(t)}0000Z`,
+    dates: `${tag}T${zwei(beginn(t) - 1)}0000Z/${tag}T${zwei(beginn(t))}0000Z`,
     location: `${t.ort}, ${t.adresse}, Schwerin`,
-    details: "Der singende klingende Adventskalender. Eintritt frei, draußen, eine gute Stunde.\nwww.musiKKlub.com",
+    details: `Der singende klingende Adventskalender. Eintritt frei, draußen, eine gute Stunde. Wer spielt, steht am Tag selbst ab ${OEFFNET_UM} Uhr auf ${SEITE}`,
   };
   return "https://calendar.google.com/calendar/render?" + Object.entries(teile).map(([k, w]) => `${k}=${k === "dates" ? w : encodeURIComponent(w)}`).join("&");
 }

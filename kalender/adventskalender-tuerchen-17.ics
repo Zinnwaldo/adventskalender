@@ -6,15 +6,16 @@ METHOD:PUBLISH
 X-WR-CALNAME:Singender klingender Adventskalender
 BEGIN:VEVENT
 UID:tuerchen-17-2026@musikklub.com
-DTSTAMP:20261120T000000Z
-SEQUENCE:1
+DTSTAMP:20261121T000000Z
+SEQUENCE:2
 DTSTART:20261217T180000Z
 DTEND:20261217T190000Z
 SUMMARY:Türchen 17: Flotte Weihnachten
 LOCATION:Flotte Weihnachten\, Werderstraße 140\, Schwerin
 GEO:53.626226;11.419558
-DESCRIPTION:Der singende klingende Adventskalender. Wer spielt\, verrät 
- das Türchen am Tag selbst ab 6 Uhr. Eintritt frei\, draußen\, eine gute
-  Stunde.\nwww.musiKKlub.com
+DESCRIPTION:Der singende klingende Adventskalender. Wer spielt\, steht am
+  Tag selbst ab 6 Uhr auf adventskalender.musikklub.com. Eintritt frei\, d
+ raußen\, eine gute Stunde.
+URL:https://adventskalender.musikklub.com/
 END:VEVENT
 END:VCALENDAR
